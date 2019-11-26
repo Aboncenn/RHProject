@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Campagne index{% endblock %}
+
+{% block body %}
+    <h1>Campagne index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Path</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for campagne in campagnes %}
+            <tr>
+                <td>{{ campagne.id }}</td>
+                <td>{{ campagne.nom }}</td>
+                <td>{{ campagne.description }}</td>
+                <td>{{ campagne.path }}</td>
+                <td>
+                    <a href="{{ path('campagne_show', {'id': campagne.id}) }}">show</a>
+                    <a href="{{ path('campagne_edit', {'id': campagne.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('campagne_new') }}">Create new</a>
+{% endblock %}

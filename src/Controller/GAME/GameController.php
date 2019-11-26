@@ -2,15 +2,14 @@
 
 namespace App\Controller\GAME;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use App\Entity\UserByCampagne;
 
 /**
  * @Route("/game")
- * @Security("is_granted('ROLE_USER') or is_granted('ROLE_RH')")
  */
 class GameController extends AbstractController
 {
@@ -19,14 +18,18 @@ class GameController extends AbstractController
    */
     public function index()
     {
+      $this->denyAccessUnlessGranted('ROLE_USER');
       $entityManager = $this->getDoctrine()->getManager();
       $user = $this->getUser();
-      $list_Campagne = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
+      $list_Campagne_started = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
+      $list_Campagne = $entityManager->getRepository(Campagne::class)->findAll();
 
       $entityManager = $this->getDoctrine()->getManager();
+      $getuser = $entityManager->getRepository(User::class)->find($user);
 
         return $this->render('game/index.html.twig', [
             'list_campagne' => $list_Campagne,
+            'list_campagne_started' =>$list_Campagne_started,
             'user'=> $user
         ]);
     }
@@ -35,32 +38,17 @@ class GameController extends AbstractController
      */
       public function new(Request $request)
       {
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $product = new UserByCampagne();
-        $form = $this->createForm();
-        $product->setIdCampagne('Keyboard');
-        $product->setPrice(1999);
-        $product->setDescription('Ergonomic and stylish!');
-
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($product);
-
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
         $this->denyAccessUnlessGranted('ROLE_USER');
-
         $entityManager = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $list_Campagne = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $getuser = $entityManager->getRepository(User::class)->find($user);
-
-          return $this->render('game/index.html.twig', [
-              'list_campagne' => $list_Campagne,
-              'user'=> $user
-          ]);
+        $usercampagne = new UserByCampagne();
+        $form = $this->createForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+          $entityManager->persist($usercampagne);
+          $entityManager->flush();
+        }
+          return $this->render('game/chat.html.twig',);
       }
 
     /**
@@ -81,12 +69,18 @@ class GameController extends AbstractController
       }
 
     /**
-     * @Route("/profile", name="profile")
+     * @Route("/profile/{id}", name="profile",methods={"GET"}, requirements={"id"="\d+"})
      */
-      public function profile()
+      public function profile(int $id)
       {
-          $entityManager = $this->getDoctrine()->getManager();
-          $user = $this->getUser();
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(Stats::class)->findByUser($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$id
+            );
+        }
 
           return $this->render('game/profile.html.twig', [
               'user' => $user,

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Campagne{% endblock %}
+
+{% block body %}
+    <h1>Campagne</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ campagne.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ campagne.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ campagne.description }}</td>
+            </tr>
+            <tr>
+                <th>Path</th>
+                <td>{{ campagne.path }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('campagne_index') }}">back to list</a>
+
+    <a href="{{ path('campagne_edit', {'id': campagne.id}) }}">edit</a>
+
+    {{ include('campagne/_delete_form.html.twig') }}
+{% endblock %}
