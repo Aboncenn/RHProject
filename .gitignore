@@ -14,4 +14,4 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 /nbproject/private/
-.env
+/.env
