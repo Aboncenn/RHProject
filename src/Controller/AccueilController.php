@@ -35,14 +35,4 @@ class AccueilController extends AbstractController
             'controller_name' => 'AccueilController',
         ]);
     }
-
-    /**
-     * @Route("/connexion", name="connexion")
-     */
-    public function connexion()
-    {
-        return $this->render('accueil/index.html.twig', [
-            'controller_name' => 'AccueilController',
-        ]);
-    }
 }
