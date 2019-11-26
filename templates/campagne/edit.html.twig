@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Campagne{% endblock %}
+{% block title %}Edition de la campagne{% endblock %}
 
 {% block body %}
-    <h1>Edit Campagne</h1>
+    <h1>Editer la campagne</h1>
 
     {{ include('campagne/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('campagne_index') }}">back to list</a>
+    <a href="{{ path('campagne_index') }}">Retour à la liste</a>
 
     {{ include('campagne/_delete_form.html.twig') }}
 {% endblock %}

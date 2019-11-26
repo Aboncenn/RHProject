@@ -23,17 +23,17 @@
                 <td>{{ campagne.description }}</td>
                 <td>{{ campagne.path }}</td>
                 <td>
-                    <a href="{{ path('campagne_show', {'id': campagne.id}) }}">show</a>
-                    <a href="{{ path('campagne_edit', {'id': campagne.id}) }}">edit</a>
+                    <a href="{{ path('campagne_show', {'id': campagne.id}) }}">Afficher</a>
+                    <a href="{{ path('campagne_edit', {'id': campagne.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucune campagne n'est disponible</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('campagne_new') }}">Create new</a>
+    <a href="{{ path('campagne_new') }}">Créer une campagne</a>
 {% endblock %}

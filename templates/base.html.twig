@@ -39,15 +39,15 @@
                             <div class="dropdown-menu" aria-labelledby="myprofil">
                                 <a class="dropdown-item" href="{{ path('profile' , {id: user.id}) }}">{{ user.prenom }} {{ user.nom }}</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ path('logout') }}" aria-disabled="true">Logout</a>
+                                <a class="dropdown-item" href="{{ path('logout') }}" aria-disabled="true">Se déconnecter</a>
                             </div>
                         </li>
                     {% else %}
                         <li class="nav-item {% if app.request.attributes.get('_route') starts with 'login' %}active{% endif %}">
-                            <a class="nav-link" href="{{ path('login') }}" aria-disabled="true">Login</a>
+                            <a class="nav-link" href="{{ path('login') }}" aria-disabled="true">Se connecter</a>
                         </li>
                         <li class="nav-item {% if app.request.attributes.get('_route') starts with 'register' %}active{% endif %}">
-                            <a class="nav-link" href="{{ path('register') }}" aria-disabled="true">Register</a>
+                            <a class="nav-link" href="{{ path('register') }}" aria-disabled="true">Créer un compte</a>
                         </li>
                     {% endif %}
                 </ul>
