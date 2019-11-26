@@ -1,5 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block navprofil %}
+<ul class="navbar-nav justify-content-end">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('login') }}" aria-disabled="true">Login</a>
+    </li>
+</ul>
+{% endblock %}
+
 {% block title %}Hello AccueilController!{% endblock %}
 
 {% block body %}
