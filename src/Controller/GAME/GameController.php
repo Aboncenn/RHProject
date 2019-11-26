@@ -5,6 +5,7 @@ namespace App\Controller\GAME;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
+use App\Entity\UserByCampagne;
 
 /**
  * @Route("/game")
@@ -12,29 +13,40 @@ use App\Entity\User;
 class GameController extends AbstractController
 {
   /**
-   * @Route("/", name="game", requirements={"user"="\d+"})
+   * @Route("/", name="game")
    */
-    public function index(int $user = 1)
+    public function index()
     {
+      $this->denyAccessUnlessGranted('ROLE_USER');
       $entityManager = $this->getDoctrine()->getManager();
-      $user = $entityManager->getRepository(User::class)->find($user);
+      $user = $this->getUser();
+      $list_Campagne = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
+      dump($list_Campagne);
+      /*
+
+      $entityManager = $this->getDoctrine()->getManager();
+      $getuser = $entityManager->getRepository(User::class)->find($user);
+
       if($user != null){
-        $list_Campagne = $user->getUserByCampagnes()->getIdCampagne()->getNom();
+        $list_Campagne = $user->getUserByCampagnes()->getIdCampagne();
+      }else{
+        $list_Campagne = NULL;
       }
 
-
+      dump($getuser->getUserByCampagnes());*/
+      $list_Campagne = 0;
         return $this->render('game/index.html.twig', [
-            'controller_name' => 'GameController',
+  //          'list_campagne' => $list_Campagne,
+          //  'user'=> $user
         ]);
     }
     /**
-     * @Route("/chat", name="chat",methods={"GET", "POST"}, requirements={"id"="\d+"})
+     * @Route("/chat", name="chat",methods={"GET", "POST"}, requirements={"user "="\d+"})
      */
-      public function chat(int $id)
+      public function chat(int $user)
       {
         $entityManager = $this->getDoctrine()->getManager();
-        $message = $entityManager->getRepository(Stats::class)->findByUser($id);
-
+        $message = $entityManager->getRepository(Stats::class)->findByUser($user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

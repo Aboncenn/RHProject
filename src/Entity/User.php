@@ -56,7 +56,7 @@ class User implements UserInterface
     private $LinkLinkedin;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserByCampagne", mappedBy="userByCampagnes")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserByCampagne", mappedBy="userByCampagnes", fetch="EAGER")
      */
     private $userByCampagnes;
 
