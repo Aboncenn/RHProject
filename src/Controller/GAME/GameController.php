@@ -7,6 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use App\Entity\UserByCampagne;
+use App\Entity\Campagne;
+use App\Entity\Chat;
 
 /**
  * @Route("/game")
@@ -21,7 +23,8 @@ class GameController extends AbstractController
       $this->denyAccessUnlessGranted('ROLE_USER');
       $entityManager = $this->getDoctrine()->getManager();
       $user = $this->getUser();
-      $list_Campagne_started = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
+    //  $list_Campagne_started = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
+     $list_Campagne_started = $entityManager->getRepository(Campagne::class)->find(1)->getCampagneByUser()->toArray();;
       $list_Campagne = $entityManager->getRepository(Campagne::class)->findAll();
 
       $entityManager = $this->getDoctrine()->getManager();
@@ -40,15 +43,16 @@ class GameController extends AbstractController
       {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $entityManager = $this->getDoctrine()->getManager();
-        $user = $this->getUser();
+        $campagne = $entityManager->getRepository(Campagne::class)->find($request->request->get('IdCampagne'));
+        $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
         $usercampagne = new UserByCampagne();
-        $form = $this->createForm();
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-          $entityManager->persist($usercampagne);
-          $entityManager->flush();
-        }
-          return $this->render('game/chat.html.twig',);
+        $chat = new Chat();
+        $usercampagne->setIdCampagne($campagne);
+        $usercampagne->setIdUser($user);
+      //  $usercampagne->setDescription('Ergonomic and stylish!');
+        $entityManager->persist($usercampagne);
+        $entityManager->flush();
+        return $this->render('game/chat.html.twig',);
       }
 
     /**

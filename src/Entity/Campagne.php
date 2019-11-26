@@ -83,24 +83,24 @@ class Campagne
     }
 
     /**
-     * @return Collection|CampagneByUser[]
+     * @return Collection|UserByCampagnes[]
      */
     public function getCampagneByUser(): Collection
     {
         return $this->campagneByUser;
     }
 
-    public function addCampagneByUser(CampagneByUser $campagneByUser): self
+    public function addCampagneByUser(UserByCampagne $campagneByUser): self
     {
-        if (!$this->campagneByUser->contains($userByCampagne)) {
-            $this->campagneByUser[] = $userByCampagne;
-            $userByCampagne->setIdUser($this);
+        if (!$this->campagneByUser->contains($campagneByUser)) {
+            $this->campagneByUser[] = $campagneByUser;
+            $campagneByUser->setIdUser($this);
         }
 
         return $this;
     }
 
-    public function removeCampagneByUser(CampagneByUser $campagneByUser): self
+    public function removeCampagneByUser(UserByCampagne $campagneByUser): self
     {
         if ($this->campagneByUser->contains($campagneByUser)) {
             $this->campagneByUser->removeElement($campagneByUser);

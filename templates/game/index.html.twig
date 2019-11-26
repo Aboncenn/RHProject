@@ -28,3 +28,29 @@
         {% endif %}
     </ul>
 {% endblock %}
+{% block body %}
+<section class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+    Nouvelle campagne
+    {% for campagne in list_campagne %}
+    <div><h6>{{ campagne.nom }}</h6>
+    <p>{{ campagne.description }}</p>
+    <form action="{{ path('newgame') }}" method="POST">
+    <input  name="IdCampagne" type="hidden" value="{{ campagne.id }}">
+    <button class="btn btn-primary"> Lancer une nouvelle campagne</button></form>
+    </div>
+    {% endfor %}
+    </div>
+    <div class="col-md-2">
+    Nouvelle campagne
+    </div>
+    <div class="col-md-8">
+    liste des campagnes
+    </div>
+    <div class="col-md-2">
+    badges
+    </div>
+  </div>
+</section>
+{% endblock %}

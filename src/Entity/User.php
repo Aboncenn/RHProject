@@ -56,7 +56,7 @@ class User implements UserInterface
     private $LinkLinkedin;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserByCampagne", mappedBy="userByCampagnes", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserByCampagne", mappedBy="id_user")
      */
     private $userByCampagnes;
 
@@ -190,7 +190,7 @@ class User implements UserInterface
             return $this->userByCampagnes;
         }
 
-        public function AddUserByCampagnes(UserByCampagnes $userByCampagnes): self
+        public function AddUserByCampagnes(UserByCampagne $userByCampagnes): self
         {
             if (!$this->userByCampagnes->contains($userByCampagnes)) {
                 $this->userByCampagnes[] = $userByCampagnes;
@@ -200,7 +200,7 @@ class User implements UserInterface
             return $this;
         }
 
-        public function removeUserByCampagnes(UserByCampagnes  $userByCampagnes): self
+        public function removeUserByCampagnes(UserByCampagne $userByCampagnes): self
         {
             if ($this->userByCampagnes->contains($userByCampagnes)) {
                 $this->userByCampagnes->removeElement($userByCampagnes);
