@@ -21,8 +21,6 @@ class AccueilController extends AbstractController
      */
     public function regles()
     {
-        return $this->render('accueil/index.html.twig', [
-            'controller_name' => 'AccueilController',
-        ]);
+        return $this->render('accueil/rules.html.twig');
     }
 }
