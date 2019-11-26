@@ -22,19 +22,17 @@ class StatRepository extends ServiceEntityRepository
     // /**
     //  * @return Stat[] Returns an array of Stat objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByUser($user)
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('s.id_User = :user')
+            ->setParameter('user', $user)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Stat

@@ -4,16 +4,25 @@ namespace App\Controller\GAME;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\User;
+
 /**
  * @Route("/game")
  */
 class GameController extends AbstractController
 {
   /**
-   * @Route("/", name="game")
+   * @Route("/", name="game", requirements={"user"="\d+"})
    */
-    public function index()
+    public function index(int $user = 1)
     {
+      $entityManager = $this->getDoctrine()->getManager();
+      $user = $entityManager->getRepository(User::class)->find($user);
+      if($user != null){
+        $list_Campagne = $user->getUserByCampagnes()->getIdCampagne()->getNom();
+      }
+
+
         return $this->render('game/index.html.twig', [
             'controller_name' => 'GameController',
         ]);
@@ -23,6 +32,10 @@ class GameController extends AbstractController
      */
       public function chat(int $id)
       {
+        $entityManager = $this->getDoctrine()->getManager();
+        $message = $entityManager->getRepository(Stats::class)->findByUser($id);
+
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -33,12 +46,21 @@ class GameController extends AbstractController
       }
 
     /**
-     * @Route("/profile/{id}", name="profile",methods={"GET"})
+     * @Route("/profile/{id}", name="profile",methods={"GET"}, requirements={"id"="\d+"})
      */
-      public function profile()
+      public function profile(int $id)
       {
-          return $this->render('game/index.html.twig', [
-              'controller_name' => 'GameController',
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(Stats::class)->findByUser($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$id
+            );
+        }
+
+          return $this->render('game/profile.html.twig', [
+              'user' => $user,
           ]);
       }
 }
