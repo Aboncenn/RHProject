@@ -1,40 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block navprofil %}
-<ul class="navbar-nav justify-content-end">
-    {% if user == null %}
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('login') }}" aria-disabled="true">Login</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('register') }}" aria-disabled="true">Register</a>
-    </li>
-    {% endif %}
-    {% if user %}
-        <ul class="navbar-nav justify-content-end">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="myprofil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Mon profil
-                </a>
-                <div class="dropdown-menu" aria-labelledby="myprofil">
-                    <a class="dropdown-item" href="{{ path('profil') }}">{{ user.prenom }} {{ user.nom }}</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ path('logout') }}" aria-disabled="true">Logout</a>
-                </div>
+    <ul class="navbar-nav justify-content-end">
+        {% if user == null %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('login') }}" aria-disabled="true">Login</a>
             </li>
-        </ul>
-    {% endif %}
-</ul>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('register') }}" aria-disabled="true">Register</a>
+            </li>
+        {% endif %}
+        {% if user %}
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="myprofil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mon profil
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="myprofil">
+                        <a class="dropdown-item" href="{{ path('profil') }}">{{ user.prenom }} {{ user.nom }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('logout') }}" aria-disabled="true">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        {% endif %}
+    </ul>
 {% endblock %}
 
 {% block body %}
     <section class="container">
-        <h1>Hello {% if user %}{{ user.username }}{% endif %}! ✅</h1>
+        <h1>Bienvenue sur RH Project Game {% if user %}{{ user.username }}{% endif %}!</h1>
 
-        <p>This friendly message is coming from:</p>
-        <ul>
-            <li>Your controller at <code><a href="{{ '/var/www/RHProject/src/Controller/AccueilController.php'|file_link(0) }}">src/Controller/AccueilController.php</a></code></li>
-            <li>Your template at <code><a href="{{ '/var/www/RHProject/templates/accueil/index.html.twig'|file_link(0) }}">templates/accueil/index.html.twig</a></code></li>
-        </ul>
+        <img src="{{ asset('images/logo.png') }}" alt="RH Project Game" />
     </section>
 {% endblock %}
