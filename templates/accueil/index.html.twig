@@ -2,9 +2,16 @@
 
 {% block navprofil %}
 <ul class="navbar-nav justify-content-end">
+    {% if user == null %}
     <li class="nav-item">
         <a class="nav-link" href="{{ path('login') }}" aria-disabled="true">Login</a>
     </li>
+    {% endif %}
+    {% if user %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('logout') }}" aria-disabled="true">Logout</a>
+        </li>
+    {% endif %}
 </ul>
 {% endblock %}
 
@@ -17,7 +24,7 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Hello {% if user %}{{ user.username }}{% endif %}! ✅</h1>
 
     This friendly message is coming from:
     <ul>
