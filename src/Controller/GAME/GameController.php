@@ -31,9 +31,42 @@ class GameController extends AbstractController
         ]);
     }
     /**
+     * @Route("/new", name="newgame",methods="POST")
+     */
+      public function new(Request $request)
+      {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $product = new UserByCampagne();
+        $form = $this->createForm();
+        $product->setIdCampagne('Keyboard');
+        $product->setPrice(1999);
+        $product->setDescription('Ergonomic and stylish!');
+
+        // tell Doctrine you want to (eventually) save the Product (no queries yet)
+        $entityManager->persist($product);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $list_Campagne = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $getuser = $entityManager->getRepository(User::class)->find($user);
+
+          return $this->render('game/index.html.twig', [
+              'list_campagne' => $list_Campagne,
+              'user'=> $user
+          ]);
+      }
+
+    /**
      * @Route("/chat", name="chat",methods={"GET", "POST"}, requirements={"user "="\d+"})
      */
-      public function chat(int $user)
+      public function chat()
       {
         $entityManager = $this->getDoctrine()->getManager();
         $message = $entityManager->getRepository(Stats::class)->findByUser($user);
