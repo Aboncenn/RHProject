@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccueilController extends AbstractController
 {
     /**
-     * @Route("/", name="accueil")
+     * @Route("/", name="accueil", schemes={"https"})
      */
     public function index()
     {
@@ -18,7 +18,7 @@ class AccueilController extends AbstractController
         ]);
     }
     /**
-     * @Route("/regle", name="regle")
+     * @Route("/regle", name="regle", schemes={"https"})
      */
     public function regles()
     {
@@ -27,7 +27,7 @@ class AccueilController extends AbstractController
         ]);
     }
     /**
-     * @Route("/avancementProjet", name="avancementProjet")
+     * @Route("/avancementProjet", name="avancementProjet", schemes={"https"})
      */
     public function avancementProjet() {
         return $this->render('accueil/avancementProjet.html.twig');

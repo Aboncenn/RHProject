@@ -5,12 +5,12 @@ namespace App\Controller\RH;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 /**
- * @Route("/dashboard")
+ * @Route("/dashboard", schemes={"https"})
  */
 class DashBoardController extends AbstractController
 {
   /**
-   * @Route("/", name="dash_board")
+   * @Route("/", name="dash_board", schemes={"https"})
    */
     public function index()
     {
@@ -20,7 +20,7 @@ class DashBoardController extends AbstractController
     }
 
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/admin", name="admin", schemes={"https"})
      */
       public function admin()
       {
@@ -30,7 +30,7 @@ class DashBoardController extends AbstractController
       }
 
       /**
-       * @Route("/addCompetence", name="addCompetence")
+       * @Route("/addCompetence", name="addCompetence", schemes={"https"})
        */
         public function addCompetence()
         {
@@ -40,7 +40,7 @@ class DashBoardController extends AbstractController
         }
 
         /**
-         * @Route("/addPointbyCompetence", name="addPointbyCompetence")
+         * @Route("/addPointbyCompetence", name="addPointbyCompetence", schemes={"https"})
          */
           public function addPointbyCompetence()
           {
