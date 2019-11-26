@@ -48,14 +48,14 @@ class GameController extends AbstractController
       }
 
     /**
-     * @Route("/profil", name="profil")
+     * @Route("/profile", name="profile")
      */
       public function profile()
       {
           $entityManager = $this->getDoctrine()->getManager();
           $user = $this->getUser();
 
-          return $this->render('game/profil.html.twig', [
+          return $this->render('game/profile.html.twig', [
               'user' => $user,
           ]);
       }
