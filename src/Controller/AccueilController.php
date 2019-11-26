@@ -26,4 +26,10 @@ class AccueilController extends AbstractController
             'user' => $this->getUser()
         ]);
     }
+    /**
+     * @Route("/avancementProjet", name="avancementProjet")
+     */
+    public function avancementProjet() {
+        return $this->render('accueil/avancementProjet.html.twig');
+    }
 }
