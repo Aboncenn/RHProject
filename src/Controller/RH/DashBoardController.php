@@ -20,7 +20,7 @@ class DashBoardController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"})
+     * @Route("/{id}",name="RH_profile", methods={"GET"})
      */
     public function show($id)
     {
@@ -40,12 +40,23 @@ class DashBoardController extends AbstractController
       }
 
       /**
-       * @Route("/admin", name="admin")
+       * @Route("/addCompetence", name="addCompetence")
        */
-        public function add()
+        public function addCompetence()
         {
             return $this->render('dash_board/index.html.twig', [
                 'controller_name' => 'DashBoardController',
             ]);
         }
+
+        /**
+         * @Route("/addPointbyCompetence", name="addPointbyCompetence")
+         */
+          public function addPointbyCompetence()
+          {
+              return $this->render('dash_board/index.html.twig', [
+                  'controller_name' => 'DashBoardController',
+              ]);
+          }
+
 }

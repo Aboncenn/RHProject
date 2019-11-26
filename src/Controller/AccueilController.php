@@ -25,14 +25,4 @@ class AccueilController extends AbstractController
             'controller_name' => 'AccueilController',
         ]);
     }
-
-    /**
-     * @Route("/inscription", name="inscription")
-     */
-    public function inscription()
-    {
-        return $this->render('accueil/index.html.twig', [
-            'controller_name' => 'AccueilController',
-        ]);
-    }
 }
