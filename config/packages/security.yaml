@@ -35,11 +35,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-<<<<<<< HEAD
-         - { path: ^/RH, roles: ROLE_RH}
-         - { path: ^/GAME, roles: ROLE_USER }
-=======
+        - { path: ^/RH, roles: ROLE_RH}
+        - { path: ^/GAME, roles: ROLE_USER }
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
->>>>>>> 2b57143405f2f7da7e7c65768d87655ef40a696a
