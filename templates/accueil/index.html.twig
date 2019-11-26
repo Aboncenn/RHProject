@@ -17,7 +17,7 @@
                     Mon profil
                 </a>
                 <div class="dropdown-menu" aria-labelledby="myprofil">
-                    <a class="dropdown-item" href="#">{{ user.prenom }} {{ user.nom }}</a>
+                    <a class="dropdown-item" href="{{ path('profil') }}">{{ user.prenom }} {{ user.nom }}</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ path('logout') }}" aria-disabled="true">Logout</a>
                 </div>

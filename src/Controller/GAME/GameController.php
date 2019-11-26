@@ -19,13 +19,11 @@ class GameController extends AbstractController
    */
     public function index()
     {
-      $this->denyAccessUnlessGranted('ROLE_USER');
       $entityManager = $this->getDoctrine()->getManager();
       $user = $this->getUser();
       $list_Campagne = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
 
       $entityManager = $this->getDoctrine()->getManager();
-      $getuser = $entityManager->getRepository(User::class)->find($user);
 
         return $this->render('game/index.html.twig', [
             'list_campagne' => $list_Campagne,
@@ -50,20 +48,14 @@ class GameController extends AbstractController
       }
 
     /**
-     * @Route("/profile/{id}", name="profile",methods={"GET"}, requirements={"id"="\d+"})
+     * @Route("/profil", name="profil")
      */
-      public function profile(int $id)
+      public function profile()
       {
-        $entityManager = $this->getDoctrine()->getManager();
-        $user = $entityManager->getRepository(Stats::class)->findByUser($id);
+          $entityManager = $this->getDoctrine()->getManager();
+          $user = $this->getUser();
 
-        if (!$user) {
-            throw $this->createNotFoundException(
-                'No user found for id '.$id
-            );
-        }
-
-          return $this->render('game/profile.html.twig', [
+          return $this->render('game/profil.html.twig', [
               'user' => $user,
           ]);
       }
