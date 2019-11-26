@@ -25,7 +25,7 @@ And copy folders into your PHP server (for ex: **wampp**)
 
 Use `composer` to update all dependencies :
 
-> composer update
+`composer update` 
 
 
 ### Configuring the Database
