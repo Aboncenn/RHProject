@@ -8,9 +8,18 @@
     </li>
     {% endif %}
     {% if user %}
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('logout') }}" aria-disabled="true">Logout</a>
-        </li>
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="myprofil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mon profil
+                </a>
+                <div class="dropdown-menu" aria-labelledby="myprofil">
+                    <a class="dropdown-item" href="#">{{ user.prenom }} {{ user.nom }}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('logout') }}" aria-disabled="true">Logout</a>
+                </div>
+            </li>
+        </ul>
     {% endif %}
 </ul>
 {% endblock %}
