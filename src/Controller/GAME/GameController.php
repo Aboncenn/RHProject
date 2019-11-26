@@ -2,6 +2,7 @@
 
 namespace App\Controller\GAME;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
@@ -9,6 +10,7 @@ use App\Entity\UserByCampagne;
 
 /**
  * @Route("/game")
+ * @Security("is_granted('ROLE_USER') or is_granted('ROLE_RH')")
  */
 class GameController extends AbstractController
 {
