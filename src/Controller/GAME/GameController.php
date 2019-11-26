@@ -19,10 +19,14 @@ class GameController extends AbstractController
         ]);
     }
     /**
-     * @Route("/chat", name="chat")
+     * @Route("/chat", name="chat",methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
-      public function chat()
+      public function chat(int $id)
       {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+        }
           return $this->render('game/index.html.twig', [
               'controller_name' => 'GameController',
           ]);

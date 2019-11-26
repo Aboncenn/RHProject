@@ -20,9 +20,9 @@ class DashBoardController extends AbstractController
     }
 
     /**
-     * @Route("/{id}",name="RH_profile", methods={"GET"})
+     * @Route("/{id}",name="RH_profile", methods={"GET"}, requirements={"id"="\d+"} )
      */
-    public function show($id)
+    public function show(int $id)
     {
         return $this->render('dash_board/index.html.twig', [
             'controller_name' => 'DashBoardController',
