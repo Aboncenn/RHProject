@@ -24,7 +24,12 @@ class GameController extends AbstractController
       $entityManager = $this->getDoctrine()->getManager();
       $user = $this->getUser();
     //  $list_Campagne_started = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
-     $list_Campagne_started = $entityManager->getRepository(Campagne::class)->find(1)->getCampagneByUser()->toArray();;
+      $lesCampagnes = $entityManager->getRepository(Campagne::class)->find(1);
+      if($lesCampagnes != null) {
+        $list_Campagne_started = $lesCampagnes->getCampagneByUser()->toArray();
+      } else {
+          $list_Campagne_started = [];
+      }
       $list_Campagne = $entityManager->getRepository(Campagne::class)->findAll();
 
       $entityManager = $this->getDoctrine()->getManager();
