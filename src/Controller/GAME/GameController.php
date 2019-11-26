@@ -21,23 +21,13 @@ class GameController extends AbstractController
       $entityManager = $this->getDoctrine()->getManager();
       $user = $this->getUser();
       $list_Campagne = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
-      dump($list_Campagne);
-      /*
 
       $entityManager = $this->getDoctrine()->getManager();
       $getuser = $entityManager->getRepository(User::class)->find($user);
 
-      if($user != null){
-        $list_Campagne = $user->getUserByCampagnes()->getIdCampagne();
-      }else{
-        $list_Campagne = NULL;
-      }
-
-      dump($getuser->getUserByCampagnes());*/
-      $list_Campagne = 0;
         return $this->render('game/index.html.twig', [
-  //          'list_campagne' => $list_Campagne,
-          //  'user'=> $user
+            'list_campagne' => $list_Campagne,
+            'user'=> $user
         ]);
     }
     /**
