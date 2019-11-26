@@ -4,45 +4,36 @@
 
 {% block body %}
 <style>
-    .body-wrapper {
-        margin: 1em auto;
-        max-width: 800px;
-        width: 95%;
+    .body-wrapper { 
+        margin: 1em auto; 
+        max-width: 800px; 
+        width: 95%; 
         font: 18px/1.5 sans-serif;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
     }
-
     h1, h2 {
         text-align: center;
-    }
-
+    },
     chat {
         padding: 10px;
     }
-
     chat-btn{
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
     }
-
     scenario{
         padding: 10px;
     }
-
     scenario-btn{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
     }
-
-    context{
-
-    }
 </style>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
 <div>
@@ -50,7 +41,7 @@
     <div class="body-wrapper">
         <div class="chat">
             <h2>Chat</h2>
-            <div>
+            <div> 
                 <h4> Messages </h4>
             </div>
             <div class="chat-btn">
@@ -58,76 +49,172 @@
                 <button id="send">BOUTON 1</button>
             </div>
         </div>
-
+        
         <div class="scenario">
             <h2>Scénario</h2>
             <div id="scenario-context" class="context">
-            toto
             </div>
             <div id="scenario-btn" class="scenario-btn">
-            toto
             </div>
         </div>
     </div>
 </div>
+<div class="col-md-8">
 
 <script>
     var COMPAIGN = {
         "1": {
-            "context": "Vous entrez dans une cave, que faites vous ?",
+            "context": "Vous entrez dans une caverne, vos yeux s'habituent tout juste à l'obscurité, que faites vous ?",
             "buttons": [
                 {
                     "id": 1,
-                    "text": "Je fouille",
-                    "link": "1",
-                },
-                {
-                    "id": 2,
-                    "text": "Je sors",
+                    "text": "On fouille",
                     "link": "2",
                 },
                 {
-                    "id": 3,
-                    "text": "Je fonce",
+                    "id": 2,
+                    "text": "On sort",
                     "link": "3",
+                },
+                {
+                    "id": 3,
+                    "text": "On fonce",
+                    "link": "4",
                 },
             ],
         },
         "2": {
-            "context": "Vous trouvez le trésor, Bravo",
+            "context": "Il y a des chauves souris et un ruisseau proches de vous, plus loin la caverne continue, où allez vous ?",
+            "buttons": [
+                {
+                    "id": 1,
+                    "text": "Proche des chauves-souris",
+                    "link": "7",
+                },
+                {
+                    "id": 2,
+                    "text": "Proche du ruisseau",
+                    "link": "8",
+                },
+                {
+                    "id": 3,
+                    "text": "On continue la caverne",
+                    "link": "4",
+                },
+            ],
+        },
+        "3": {
+            "context": "Avez vous si peur que ça ? il n'y a rien dehors, que faites vous ?",
+            "buttons": [
+                {
+                    "id": 1,
+                    "text": "On retourne dans la caverne",
+                    "link": "1",
+                },
+                {
+                    "id": 2,
+                    "text": "Abandonner",
+                    "link": "-1",
+                }
+             ],
+        },
+        "4": {
+            "context": "Alors que vous avancez dans la caverne, vous voyez un trésor au loin, que faites vous",
             "buttons": [
                 {
                     "id": 4,
-                    "text": "Je fuis",
-                    "link": "5",
+                    "text": "C'est surement un piege, on fait demi tour",
+                    "link": "2",
                 },
                 {
                     "id": 5,
-                    "text": "Je l'ouvre",
+                    "text": "On l'ouvre !",
                     "link": "6",
                 },
             ],
         },
+        "6": {
+            "context": "Vous etes riches, Bravo",
+            "buttons": [
+                {
+                    "id": 5,
+                    "text": "Terminer",
+                    "link": "-1",
+                },
+            ],
+        },
+        "7": {
+            "context": "Une des chauves souris s'envole vers l'extérieur de la caverne, que faites vous ?",
+            "buttons": [
+                {
+                    "id": 1,
+                    "text": "On sort avec la chauve souris",
+                    "link": "3",
+                },
+                {
+                    "id": 2,
+                    "text": "On continue de fouiller",
+                    "link": "2",
+                },
+            ],
+        },
+        "8": {
+            "context": "Une carcasse de chevreuil est étendue au fond du ruisseau, que faites vous ?",
+            "buttons": [
+                {
+                    "id": 1,
+                    "text": "On fouille la carcasse",
+                    "link": "9",
+                },
+                {
+                    "id": 2,
+                    "text": "On continue de fouiller la caverne",
+                    "link": "2",
+                },
+            ],
+        },
+        "9": {
+            "context": "Des traces de crocs acérés montrent que cette carcasse a été dévorée par un loup, que faites vous ?",
+            "buttons": [
+                {
+                    "id": 1,
+                    "text": "On avance dans la caverne ! si il ya un loup, nous le tuerons !",
+                    "link": "4",
+                },
+                {
+                    "id": 2,
+                    "text": "On continue de fouiller la caverne",
+                    "link": "2",
+                },
+                {
+                    "id": 2,
+                    "text": "Un loup ? fuions !",
+                    "link": "3",
+                },
+            ],
+        }
+
+
     };
 
     $(function() {
         $('#send').click(function() {
             $.ajax({
-                url : "message.php" + premierID, // on passe l'id le plus récent au fichier de chargement
+                url : "/game/chat.php" + premierID, // on passe l'id le plus récent au fichier de chargement
                 type : "GET",
                 data : {"pseudo": pseudo,"message": message},
                 success : function(html){
                     $('#messages').prepend(html);
                 }
-            });
-        });
+            });    
+        });  
     });
 
     function reload(){
         setTimeout(function(){
             var premierID = $('#messages p:first').attr('id'); // on récupère l'id le plus récent
             $.ajax({
-                url : "reload.php?id=" + premierID, // on passe l'id le plus récent au fichier de chargement
+                url : "/game/chat.php?id=" + premierID, // on passe l'id le plus récent au fichier de chargement
                 type : "GET",
                 success : function(html){
                     $('#messages').prepend(html);
@@ -140,24 +227,30 @@
 
     function fill_context(id){
         var element = document.getElementById("scenario-context");
+        if(id == "-1"){
+            element.innerHTML = "Terminé";
+            return false;
+        }
         element.innerHTML = "<p> " + COMPAIGN[id]["context"] + "</p>";
     }
 
     function fill_buttons(id){
+        
         var element = document.getElementById("scenario-btn");
-        console.log(element);
         var html = ""
+        if(id == "-1"){
+            element.innerHTML = "";
+            return false;
+        }
         COMPAIGN[id]["buttons"].forEach(function(item){
             html = html + '<button id="'+ item["id"]+ '" onclick="fill_game_scenario(' + item["link"] + ')">' + item["text"] + '</button>';
         });
-        console.log(html);
         element.innerHTML = html;
     }
 
     function fill_game_scenario(id){
         fill_context(id);
-        fill_buttons(id);
-
+        fill_buttons(id); 
     }
 
     //reload();

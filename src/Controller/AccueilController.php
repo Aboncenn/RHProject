@@ -22,6 +22,14 @@ class AccueilController extends AbstractController
      */
     public function regles()
     {
-        return $this->render('accueil/rules.html.twig');
+        return $this->render('accueil/rules.html.twig', [
+            'user' => $this->getUser()
+        ]);
+    }
+    /**
+     * @Route("/avancementProjet", name="avancementProjet")
+     */
+    public function avancementProjet() {
+        return $this->render('accueil/avancementProjet.html.twig');
     }
 }
