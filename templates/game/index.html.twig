@@ -2,8 +2,36 @@
 
 {% block title %}Hello GameController!{% endblock %}
 
+{% block navprofil %}
+    <ul class="navbar-nav justify-content-end">
+        {% if user == null %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('login') }}" aria-disabled="true">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('register') }}" aria-disabled="true">Register</a>
+            </li>
+        {% endif %}
+        {% if user %}
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="myprofil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mon profil
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="myprofil">
+                        <a class="dropdown-item" href="#">{{ user.prenom }} {{ user.nom }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('logout') }}" aria-disabled="true">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        {% endif %}
+    </ul>
+{% endblock %}
+
 {% block body %}
 <style>
+<<<<<<< HEAD
     .body-wrapper { 
         margin: 1em auto; 
         max-width: 800px; 
@@ -58,8 +86,20 @@
             </div>
         </div>
     </div>
-</div>
+=======
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
 
+<section class="container">
+<div class="row">
+<div class="col-md-2">
+<h5>liste des aventures en cours</h5>
+>>>>>>> 90413bc2519d07d04f90a87a43ada03828a7648d
+</div>
+<div class="col-md-8">
+
+<<<<<<< HEAD
 <script>
     var COMPAIGN = {
         "1": {
@@ -257,3 +297,11 @@
 </script>
 
 {% endblock %}
+=======
+</div>
+<div class="col-md-2">
+<h5>liste des badges</h5>
+</div>
+</section>
+{% endblock %}  
+>>>>>>> 90413bc2519d07d04f90a87a43ada03828a7648d

@@ -55,6 +55,11 @@ class User implements UserInterface
      */
     private $LinkLinkedin;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserByCampagne", mappedBy="userByCampagnes", fetch="EAGER")
+     */
+    private $userByCampagnes;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -175,4 +180,37 @@ class User implements UserInterface
 
         return $this;
     }
+
+
+        /**
+         * @return Collection|UserByCampagnes[]
+         */
+        public function getUserByCampagnes(): Collection
+        {
+            return $this->userByCampagnes;
+        }
+
+        public function AddUserByCampagnes(UserByCampagnes $userByCampagnes): self
+        {
+            if (!$this->userByCampagnes->contains($userByCampagnes)) {
+                $this->userByCampagnes[] = $userByCampagnes;
+                $userByCampagnes->setIdUser($this);
+            }
+
+            return $this;
+        }
+
+        public function removeUserByCampagnes(UserByCampagnes  $userByCampagnes): self
+        {
+            if ($this->userByCampagnes->contains($userByCampagnes)) {
+                $this->userByCampagnes->removeElement($userByCampagnes);
+                // set the owning side to null (unless already changed)
+                if ($userByCampagnes->getIdUser() === $this) {
+                    $userByCampagnes->setIdUser(null);
+                }
+            }
+
+            return $this;
+        }
+
 }
