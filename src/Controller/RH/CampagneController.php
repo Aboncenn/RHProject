@@ -25,6 +25,7 @@ class CampagneController extends AbstractController
     {
         return $this->render('campagne/index.html.twig', [
             'campagnes' => $campagneRepository->findAll(),
+            'user' => $this->getUser()
         ]);
     }
 
@@ -48,6 +49,7 @@ class CampagneController extends AbstractController
         return $this->render('campagne/new.html.twig', [
             'campagne' => $campagne,
             'form' => $form->createView(),
+            'user' => $this->getUser()
         ]);
     }
 
@@ -58,6 +60,7 @@ class CampagneController extends AbstractController
     {
         return $this->render('campagne/show.html.twig', [
             'campagne' => $campagne,
+            'user' => $this->getUser()
         ]);
     }
 
@@ -78,6 +81,7 @@ class CampagneController extends AbstractController
         return $this->render('campagne/edit.html.twig', [
             'campagne' => $campagne,
             'form' => $form->createView(),
+            'user' => $this->getUser()
         ]);
     }
 

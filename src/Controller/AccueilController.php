@@ -30,6 +30,9 @@ class AccueilController extends AbstractController
      * @Route("/avancementProjet", name="avancementProjet", schemes={"https"})
      */
     public function avancementProjet() {
-        return $this->render('accueil/avancementProjet.html.twig');
+        return $this->render('accueil/avancementProjet.html.twig', [
+            'controller_name' => 'AccueilController',
+            'user' => $this->getUser()
+        ]);
     }
 }

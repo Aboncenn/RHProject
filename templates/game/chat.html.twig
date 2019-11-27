@@ -4,8 +4,10 @@
 
 {% block body %}
 <style>
-    .bground{
+    body{
         background-color: rgb(66, 63, 57);
+        height: 100%;
+        width: 100%
     }
     .body-wrapper {
         height: 100%;
@@ -18,6 +20,22 @@
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
+    }
+    .bground h1{
+        color: rgb(237, 216, 202);
+        font: italic 3em "Fira Sans", serif;
+    }
+
+    .bground h2, h3, h4, h5, h6{
+        color: rgb(66, 63, 57);
+        font: italic 2em "Fira Sans", serif;
+    }
+    .bground h3, h4, h5, h6{
+        color: rgb(66, 63, 57);
+        font: italic 1.5em "Fira Sans", serif;
+    }
+    .bground h6{
+        font: italic 1em "Fira Sans", serif;
     }
     h1, h2 {
         text-align: center;
@@ -42,6 +60,11 @@
         display: flex;
         flex-direction: row;
     }
+    .chat-btns{
+        width: 300px;
+        display: flex;
+        flex-direction: row;
+    }
     .scenario{
         width: 400px;
         padding: 10px;
@@ -58,6 +81,11 @@
         border: rgb(237, 216, 202) solid 1px;
         
     }
+    .scenario-btn:hover{
+        background-color: rgb(237, 216, 202);
+        color: rgb(66, 63, 57);
+        border: rgb(66, 63, 57) solid 1px;   
+    }
     .context{
         font: italic 0.9em "Fira Sans", serif;
         text-align: justify;
@@ -67,6 +95,13 @@
     }
     .chat-btn{
         width: 30%;
+        background-color: rgb(66, 63, 57);
+        color: rgbrgb(237, 216, 202);
+    }
+    .chat-btn:hover{
+        width: 30%;
+        background-color: rgb(237, 216, 202);
+        color: rgb(66, 63, 57);
     }
     .chat-message-title{
         border-bottom: 1px solid rgb(166, 147, 111);
@@ -75,11 +110,9 @@
         text-align:center;
     }
 </style>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 
 <div class="bground">
-    <h1>Page de jeu</h1>
+    <h1>Page de jeu de <strong id="user">{{ user.username }}</strong></h1>
     <div class="body-wrapper">
         <div class="chat">
             <h2>Chat</h2>
@@ -246,13 +279,14 @@
         $('#send').click(function() {
             var messages = document.getElementById("messages");
             var msg = document.getElementById("message-content");
-            messages.innerHTML = messages.innerHTML + "<strong> user : </strong>" + msg.value + "<br>";
+            var user = document.getElementById("user").innerHTML;
+            messages.innerHTML = messages.innerHTML + "<strong>" + user + ": </strong>" + msg.value + "<br>";
             messages.scrollTop = messages.scrollHeight - messages.clientHeight;
-            //msg.value = "";
+            msg.value = "";
             $.ajax({
-                url : "/game/chat.php", // on passe l'id le plus récent au fichier de chargement
+                url : "/game/chat.php",
                 type : "GET",
-                data : {"pseudo": 'toto',"message": msg},
+                data : {"pseudo": user,"message": msg},
             });    
         });  
     });

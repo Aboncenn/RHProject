@@ -1,56 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block navprofil %}
-    <ul class="navbar-nav justify-content-end">
-        {% if user == null %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('login') }}" aria-disabled="true">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('register') }}" aria-disabled="true">Register</a>
-            </li>
-        {% endif %}
-        {% if user %}
-            <ul class="navbar-nav justify-content-end">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="myprofil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Mon profil
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="myprofil">
-                        <a class="dropdown-item" href="{{ path('profile') }}">{{ user.prenom }} {{ user.nom }}</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ path('logout') }}" aria-disabled="true">Logout</a>
-                    </div>
-                </li>
-            </ul>
-        {% endif %}
-    </ul>
-{% endblock %}
 {% block body %}
-<section class="container-fluid">
-  <div class="row">
-    <div class="col-md-2">
-    Nouvelle campagne
+    <h3>Nouvelle campagne</h3>
     {% for campagne in list_campagne %}
-    <div><h6>{{ campagne.nom }}</h6>
-    <p>{{ campagne.description }}</p>
-    <form action="{{ path('newgame') }}" method="POST">
-    <input  name="IdCampagne" type="hidden" value="{{ campagne.id }}">
-    <button class="btn btn-primary"> Lancer une nouvelle campagne</button></form>
-    </div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{ asset('images/') ~ 'aventure' ~ random('0123456789') ~ '.png'}}" alt="Illustration de l'aventure">
+            <div class="card-body">
+                <h5 class="card-title">{{ campagne.nom }}</h5>
+                <p class="card-text">{{ campagne.description }}</p>
+                <form action="{{ path('newgame') }}" method="POST">
+                    <input  name="IdCampagne" type="hidden" value="{{ campagne.id }}">
+                    <button class="btn btn-light"><i class="fa fa-plus-circle"></i> Créer</button>
+                </form>
+            </div>
+        </div>
     {% endfor %}
-    </div>
-    <div class="col-md-8">
-    liste des campagnes en cours
+    <hr/>
+    <h3>Campagnes en cours</h3>
     {% for campagne in list_campagne_started %}
-    <div><h6>{{ campagne.nom }}</h6>
-    <a href="{{ path ('chat', {game: campagne.id})}}"><button class="btn btn-primary"> relancer la campagne</button></a>
-    </div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{ asset('images/') ~ 'aventure' ~ random('0123456789') ~ '.png'}}" alt="Illustration de l'aventure">
+            <div class="card-body">
+                <h5 class="card-title">{{ campagne.nom }}</h5>
+                <a href="{{ path ('chat', {game: campagne.id})}}" class="btn btn-success"> Relancer la campagne</a>
+            </div>
+        </div>
+
     {% endfor %}
-    </div>
-    <div class="col-md-2">
-    badges
-    </div>
-  </div>
-</section>
 {% endblock %}

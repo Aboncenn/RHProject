@@ -79,13 +79,27 @@ class GameController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $campagne= $entityManager->getRepository(UserByCampagne::class)->find($game);
         $chat = $campagne->getChats();
-        $user = $this->getUser()->getUsername();
+        $user = $this->getUser();
 
           return $this->render('game/chat.html.twig', [
               'chat' => $chat,
               'user' => $user
           ]);
       }
+      /**
+      * @Route("/chat/{chatid}/getchat", name="getChat",methods={"GET", "POST"}, requirements={"game "="\d+", "id "="\d+"} )
+      */
+        public function getChat($chatid, $idmessage)
+        {
+          $this->denyAccessUnlessGranted('ROLE_USER');
+          $entityManager = $this->getDoctrine()->getManager();
+          $Allmessenger= $entityManager->getRepository(MessageRepository::class)->getMessage($chatid,$idmessage);
+          $user = $this->getUser();
+          return $this->render('game/chat.html.twig', [
+              'message' => $Allmessenger,
+              'user' => $user
+          ]);
+        }
 
     /**
      * @Route("/profile", name="profile", schemes={"https"})
@@ -101,4 +115,5 @@ class GameController extends AbstractController
               'stat' => $stat
           ]);
       }
+
 }
