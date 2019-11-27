@@ -16,5 +16,8 @@
         <li>Your controller at <code><a href="{{ '/var/www/RHProject/src/Controller/DashBoardController.php'|file_link(0) }}">src/Controller/DashBoardController.php</a></code></li>
         <li>Your template at <code><a href="{{ '/var/www/RHProject/templates/dash_board/index.html.twig'|file_link(0) }}">templates/dash_board/index.html.twig</a></code></li>
     </ul>
+    {% for user in users %}
+    <p>user.username</p>
+    {% endfor %}
 </div>
 {% endblock %}

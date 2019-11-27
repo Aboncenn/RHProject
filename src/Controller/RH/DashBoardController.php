@@ -2,6 +2,7 @@
 
 namespace App\Controller\RH;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +22,7 @@ class DashBoardController extends AbstractController
 
       return $this->render('dashboard/index.html.twig', [
             'user' => $user,
-            'allUser'=>$Alluser
+            'users'=>$Alluser
         ]);
     }
 

@@ -37,11 +37,11 @@
     .bground h6{
         font: italic 1em "Fira Sans", serif;
     }
+    .bground h2 strong{
+        font: italic 0.6em "Fira Sans", serif;
+    }
     h1, h2 {
         text-align: center;
-    }
-    .chat {
-
     }
     .chat-box {
         padding: 10px;
@@ -115,7 +115,7 @@
     <h1>Page de jeu de <strong id="user">{{ user.username }}</strong></h1>
     <div class="body-wrapper">
         <div class="chat">
-            <h2>Chat</h2>
+            <h2>Chat <strong id="chat-id">{{ chat.id }}</strong></h2>
             <div class="chat-box"> 
                 <h6 class="chat-message-title"> Messages </h3>
                 <div class="chat-messages" id="messages">
@@ -293,10 +293,13 @@
 
     function reload(){
         setTimeout(function(){
-            var premierID = $('#messages p:first').attr('id'); // on récupère l'id le plus récent
+            var chat_id = document.getElementById("chat-id").innerHTML;
+            console.log(chat_id);
+            var premierID = $('#messages p:first').attr('id');
             $.ajax({
-                url : "/game/chat.php?id=" + premierID, // on passe l'id le plus récent au fichier de chargement
+                url : "/game/chat/" + chat_id + "/getChat", // on passe l'id le plus récent au fichier de chargement
                 type : "GET",
+                data: premierID,
                 success : function(html){
                     $('#messages').prepend(html);
                 }
@@ -334,7 +337,7 @@
         fill_buttons(id); 
     }
 
-    //reload();
+    reload();
     fill_game_scenario("1");
 </script>
 
