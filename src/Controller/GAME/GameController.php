@@ -77,7 +77,7 @@ class GameController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $campagne= $entityManager->getRepository(UserByCampagne::class)->find($game);
         $chat = $campagne->getChats();
-        $user = $this->getUser()->getUsername();
+        $user = $this->getUser();
 
           return $this->render('game/chat.html.twig', [
               'chat' => $chat,
@@ -85,7 +85,7 @@ class GameController extends AbstractController
           ]);
       }
       /**
-      * @Route("/chat/{chatid}/getchat", name="getChat", requirements={"game "="\d+", "id "="\d+"} )
+      * @Route("/chat/{chatid}/getchat", name="getChat",methods={"GET", "POST"}, requirements={"game "="\d+", "id "="\d+"} )
       */
         public function getChat($chatid, $idmessage)
         {
