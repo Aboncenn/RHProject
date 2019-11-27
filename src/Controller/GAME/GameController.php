@@ -86,7 +86,7 @@ class GameController extends AbstractController
           $value->setCriticalThinking(random_int(1, 10));
           $value->setLeadership(random_int(1, 10));
           $value->setPositiveAttitude(random_int(1, 10));
-          $value->setLeadership(random_int(1, 10));
+          $value->setTeamWork(random_int(1, 10));
           $value->setWorkEthic(random_int(1, 10));
         } 
         $entityManager->persist($value);

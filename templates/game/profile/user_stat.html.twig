@@ -1,5 +1,17 @@
-<div class="wrapper">
-    <canvas id="profile-radar" width="400" height="400"></canvas>
+<div class="row">
+    <div class="col-sm-6">
+        <input id="profil-Communication" type="hidden" value="{{ stat.Communication }}" />
+        <input id="profil-CriticalThinking" type="hidden" value="{{ stat.CriticalThinking }}" />
+        <input id="profil-Leadership" type="hidden" value="{{ stat.Leadership }}" />
+        <input id="profil-PositiveAttitude" type="hidden" value="{{ stat.PositiveAttitude }}" />
+        <input id="profil-TeamWork" type="hidden" value="{{ stat.TeamWork }}" />
+        <input id="profil-WorkEthic" type="hidden" value="{{ stat.WorkEthic }}" />
+
+        <canvas id="profile-radar" width="400" height="400"></canvas>
+    </div>
+    <div class="col-sm-6">
+        {{ dump(stat) }}
+    </div>
 </div>
 
 <script>
@@ -11,7 +23,14 @@
             datasets: [{
                 label: 'Vos compétences',
                 fill: true,
-                data: [5, 2, 7, 4, 1, 9],
+                data: [
+                    $("#profil-Communication").val(),
+                    $("#profil-CriticalThinking").val(),
+                    $("#profil-Leadership").val(),
+                    $("#profil-PositiveAttitude").val(),
+                    $("#profil-TeamWork").val(),
+                    $("#profil-WorkEthic").val()
+                ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -42,7 +61,6 @@
                 },
                 ticks: {
                     suggestedMin: 0,
-                    suggestedMax: 10,
                     fontSize: 20,
                     stepSize: 2
                 }
