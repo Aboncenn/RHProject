@@ -16,11 +16,12 @@ class DashBoardController extends AbstractController
    */
     public function index()
     {
-      $this->denyAccessUnlessGranted('ROLE_RH');
-      $entityManager = $this->getDoctrine()->getManager();
-      
+      $user = $this->getUser();
+      $Alluser= $entityManager->getRepository(UserRepository::class)->findAll();
+
       return $this->render('dashboard/index.html.twig', [
-            'controller_name' => 'DashBoardController',
+            'user' => $user,
+            'allUser'=>$Alluser
         ]);
     }
 
