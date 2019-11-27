@@ -15,7 +15,7 @@ use App\Entity\Chat;
 class GameController extends AbstractController
 {
   /**
-   * @Route("/", name="game")
+   * @Route("/", name="game", schemes={"https"})
    */
     public function index()
     {
@@ -36,7 +36,7 @@ class GameController extends AbstractController
         ]);
     }
     /**
-     * @Route("/new", name="newgame",methods="POST")
+     * @Route("/new", name="newgame",methods="POST", schemes={"https"})
      */
       public function new(Request $request)
       {
@@ -60,7 +60,7 @@ class GameController extends AbstractController
       }
 
     /**
-     * @Route("/chat", name="chat",methods={"GET", "POST"}, requirements={"user "="\d+"})
+     * @Route("/chat", name="chat",methods={"GET", "POST"}, requirements={"user "="\d+"}, schemes={"https"})
      */
       public function chat()
       {
@@ -77,7 +77,7 @@ class GameController extends AbstractController
       }
 
     /**
-     * @Route("/profile/{id}", name="profile",methods={"GET"}, requirements={"id"="\d+"})
+     * @Route("/profile/{id}", name="profile",methods={"GET"}, requirements={"id"="\d+"}, schemes={"https"})
      */
       public function profile(int $id)
       {
