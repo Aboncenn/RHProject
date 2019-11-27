@@ -2,6 +2,7 @@
 
 namespace App\Controller\GAME;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,6 +12,7 @@ use App\Entity\Campagne;
 use App\Entity\Chat;
 /**
  * @Route("/game")
+ * @Security("is_granted('ROLE_USER') or is_granted('ROLE_RH')")
  */
 class GameController extends AbstractController
 {
