@@ -2,6 +2,7 @@
 
 namespace App\Controller\RH;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,8 +18,12 @@ class DashBoardController extends AbstractController
     public function index()
     {
       $this->denyAccessUnlessGranted('ROLE_RH');
+      $entityManager = $this->getDoctrine()->getManager();
+      $users = $entityManager->getRepository(User::class)->findAll();
+
       return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashBoardController',
+            'users' => $users,
         ]);
     }
 
