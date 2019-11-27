@@ -10,6 +10,8 @@ use App\Entity\User;
 use App\Entity\UserByCampagne;
 use App\Entity\Campagne;
 use App\Entity\Chat;
+use App\Entity\Stat;
+
 /**
  * @Route("/game")
  * @Security("is_granted('ROLE_USER') or is_granted('ROLE_RH')")
@@ -77,7 +79,17 @@ class GameController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $campagne= $entityManager->getRepository(UserByCampagne::class)->find($game);
         $chat = $campagne->getChats();
-        $user = $this->getUser()->getUsername();
+        $user = $this->getUser();
+
+        $upstat= $entityManager->getRepository(StatRepository::class)->findBy(['id_User' => $game]);
+        $upstat->setCommunication(random_int(1, 10));
+        $upstat->setCriticalThinking(random_int(1, 10));
+        $upstat->setLeadership(random_int(1, 10));
+        $upstat->setPositiveAttitude(random_int(1, 10));
+        $upstat->setLeadership(random_int(1, 10));
+        $upstat->setWorkEthic(random_int(1, 10));
+        $entityManager->persist($upstat);
+        $entityManager->flush();
 
           return $this->render('game/chat.html.twig', [
               'chat' => $chat,
@@ -85,7 +97,7 @@ class GameController extends AbstractController
           ]);
       }
       /**
-      * @Route("/chat/{chatid}/getchat", name="getChat", requirements={"game "="\d+", "id "="\d+"} )
+      * @Route("/chat/{chatid}/getchat", name="getChat",methods={"GET", "POST"}, requirements={"game "="\d+", "id "="\d+"} )
       */
         public function getChat($chatid, $idmessage)
         {
@@ -106,9 +118,11 @@ class GameController extends AbstractController
       {
           $entityManager = $this->getDoctrine()->getManager();
           $user = $this->getUser();
+          $stat = $entityManager->getRepository(Stat::class)->find($user);
 
           return $this->render('game/profile.html.twig', [
               'user' => $user,
+              'stat' => $stat
           ]);
       }
 
