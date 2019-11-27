@@ -17,9 +17,10 @@ class DashBoardController extends AbstractController
     public function index()
     {
       $this->denyAccessUnlessGranted('ROLE_RH');
+      $entityManager = $this->getDoctrine()->getManager();
+      
       return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashBoardController',
-            'user' => $this->getUser()
         ]);
     }
 
@@ -30,8 +31,7 @@ class DashBoardController extends AbstractController
       {
           return $this->render('dash_board/index.html.twig', [
               'controller_name' => 'DashBoardController',
-              'user' => $this->getUser()
-        ]);
+          ]);
       }
 
       /**
@@ -41,7 +41,6 @@ class DashBoardController extends AbstractController
         {
             return $this->render('dash_board/index.html.twig', [
                 'controller_name' => 'DashBoardController',
-                'user' => $this->getUser()
             ]);
         }
 
@@ -52,7 +51,6 @@ class DashBoardController extends AbstractController
           {
               return $this->render('dash_board/index.html.twig', [
                   'controller_name' => 'DashBoardController',
-                  'user' => $this->getUser()
               ]);
           }
 
