@@ -79,6 +79,7 @@
         background-color: rgb(66, 63, 57);
         color: rgb(237, 216, 202);
         border: rgb(237, 216, 202) solid 1px;
+        overflow: auto;
         
     }
     .scenario-btn:hover{
@@ -115,7 +116,7 @@
     <h1>Page de jeu de <strong id="user">{{ user.username }}</strong></h1>
     <div class="body-wrapper">
         <div class="chat">
-            <h2>Chat <strong id="chat-id">{{ chat.id }}</strong></h2>
+            <h2>Chat</h2>
             <div class="chat-box"> 
                 <h6 class="chat-message-title"> Messages </h3>
                 <div class="chat-messages" id="messages">
