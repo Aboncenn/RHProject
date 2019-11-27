@@ -85,18 +85,18 @@ class GameController extends AbstractController
           ]);
       }
       /**
-       * @Route("/chat/{chatid}", name="getChat", requirements={"game "="\d+", "id "="\d+"} )
-       */
+      * @Route("/chat/{chatid}/getchat", name="getChat", requirements={"game "="\d+", "id "="\d+"} )
+      */
         public function getChat($chatid, $idmessage)
         {
           $this->denyAccessUnlessGranted('ROLE_USER');
           $entityManager = $this->getDoctrine()->getManager();
           $Allmessenger= $entityManager->getRepository(MessageRepository::class)->getMessage($chatid,$idmessage);
           $user = $this->getUser();
-            return $this->render('game/chat.html.twig', [
-                'message' => $Allmessenger,
-                'user' => $user
-            ]);
+          return $this->render('game/chat.html.twig', [
+              'message' => $Allmessenger,
+              'user' => $user
+          ]);
         }
 
     /**
