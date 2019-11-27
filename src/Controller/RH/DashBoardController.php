@@ -3,9 +3,11 @@
 namespace App\Controller\RH;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/dashboard", schemes={"https"})
+ * @Security("is_granted('ROLE_RH')")
  */
 class DashBoardController extends AbstractController
 {
