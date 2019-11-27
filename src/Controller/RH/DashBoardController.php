@@ -14,7 +14,8 @@ class DashBoardController extends AbstractController
    */
     public function index()
     {
-        return $this->render('dash_board/index.html.twig', [
+      $this->denyAccessUnlessGranted('ROLE_RH');
+      return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashBoardController',
         ]);
     }

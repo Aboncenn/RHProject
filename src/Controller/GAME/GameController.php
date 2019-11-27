@@ -63,7 +63,10 @@ class GameController extends AbstractController
         $entityManager->persist($usercampagne);
         $entityManager->flush();
 
-        return $this->render('game/chat.html.twig');
+        return $this->render('game/chat.html.twig', [
+            'chat' => $chat,
+            'user' => $user
+        ]);
       }
 
     /**

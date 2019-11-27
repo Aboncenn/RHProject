@@ -48,9 +48,15 @@ class RegistrationController extends AbstractController
             $user->setPrenom(
                 $form->get('firstname')->getData()
             );
-            $user->setRoles(
-                array('ROLE_USER')
-            );
+            if($form->get('isRH')->getData() == true ){
+              $user->setRoles(
+                  array('ROLE_USER','ROLE_RH')
+              );
+            }else{
+              $user->setRoles(
+                  array('ROLE_USER')
+              );
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

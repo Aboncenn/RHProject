@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -86,6 +87,12 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('isRH', CheckboxType::class, [
+                'mapped' => false,
+                'label'    => 'Etes vous un compte RH ?',
+                'required' => false,
+                'value' => true
+            ]);
         ;
     }
 

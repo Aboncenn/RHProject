@@ -1,10 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GameController!{% endblock %}
+{% block title %}Game{% endblock %}
 
 {% block body %}
 <style>
-    .body-wrapper { 
+    .bground{
+        background-color: rgb(66, 63, 57);
+    }
+    .body-wrapper {
+        height: 100%;
+        padding: 5%;
+        background-color: rgb(166, 147, 111);
         margin: 1em auto; 
         max-width: 800px; 
         width: 95%; 
@@ -16,37 +22,76 @@
     h1, h2 {
         text-align: center;
     }
-    chat {
-        padding: 10px;
+    .chat {
+
     }
-    chat-btn{
+    .chat-box {
+        padding: 10px;
+        height: 300px;
+        width: 300px;
+        background-color: rgb(237, 216, 202);
+        border-radius: 2% 2% 0 0 ;
+    }
+    .chat-messages {
+        height: 100%;
+        overflow: auto;
+    }
+
+    .chat-btns{
+        width: 300px;
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
     }
-    scenario{
+    .scenario{
+        width: 400px;
         padding: 10px;
     }
-    scenario-btn{
+    .scenario-btns{
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+    }
+    .scenario-btn{
+        margin: 2px;
+        background-color: rgb(66, 63, 57);
+        color: rgb(237, 216, 202);
+        border: rgb(237, 216, 202) solid 1px;
+        
+    }
+    .context{
+        font: italic 0.9em "Fira Sans", serif;
+        text-align: justify;
+    }
+    .chat-input{
+        width: 70%;
+    }
+    .chat-btn{
+        width: 30%;
+    }
+    .chat-message-title{
+        border-bottom: 1px solid rgb(166, 147, 111);
+        padding: 1%;
+        width: 100%;
+        text-align:center;
     }
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
-<div>
+<div class="bground">
     <h1>Page de jeu</h1>
     <div class="body-wrapper">
         <div class="chat">
             <h2>Chat</h2>
-            <div> 
-                <h4> Messages </h4>
+            <div class="chat-box"> 
+                <h6 class="chat-message-title"> Messages </h3>
+                <div class="chat-messages" id="messages">
+
+                </div>
             </div>
-            <div class="chat-btn">
-                <input type="text" placeholder="Tapez message ici " />
-                <button id="send">BOUTON 1</button>
+            <div class="chat-btns">
+                <input class="form-control chat-input" type="text" id="message-content" placeholder="Tapez message ici " />
+                <button class="btn btn-success chat-btn" id="send">Envoyer</button>
             </div>
         </div>
         
@@ -54,7 +99,7 @@
             <h2>Scénario</h2>
             <div id="scenario-context" class="context">
             </div>
-            <div id="scenario-btn" class="scenario-btn">
+            <div id="scenario-btn" class="scenario-btns">
             </div>
         </div>
     </div>
@@ -199,13 +244,15 @@
 
     $(function() {
         $('#send').click(function() {
+            var messages = document.getElementById("messages");
+            var msg = document.getElementById("message-content");
+            messages.innerHTML = messages.innerHTML + "<strong> user : </strong>" + msg.value + "<br>";
+            messages.scrollTop = messages.scrollHeight - messages.clientHeight;
+            //msg.value = "";
             $.ajax({
-                url : "/game/chat.php" + premierID, // on passe l'id le plus récent au fichier de chargement
+                url : "/game/chat.php", // on passe l'id le plus récent au fichier de chargement
                 type : "GET",
-                data : {"pseudo": pseudo,"message": message},
-                success : function(html){
-                    $('#messages').prepend(html);
-                }
+                data : {"pseudo": 'toto',"message": msg},
             });    
         });  
     });
@@ -243,7 +290,7 @@
             return false;
         }
         COMPAIGN[id]["buttons"].forEach(function(item){
-            html = html + '<button id="'+ item["id"]+ '" onclick="fill_game_scenario(' + item["link"] + ')">' + item["text"] + '</button>';
+            html = html + '<button class="scenario-btn btn btn-outline-primary btn-sm" id="'+ item["id"]+ '" onclick="fill_game_scenario(' + item["link"] + ')">' + item["text"] + '</button>';
         });
         element.innerHTML = html;
     }
