@@ -13,7 +13,7 @@
         <ul>
             {% for user_item in users %}
                 <li>
-                    <a href="{{ asset('game/') ~ 'profile?id=' ~ user_item.id }}">
+                    <a href="{{ asset('game/') ~ 'profile/' ~ user_item.id }}">
                         <strong>{{user_item.username}}</strong>
                     </a>
                 </li>
