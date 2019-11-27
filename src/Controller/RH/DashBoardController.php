@@ -2,6 +2,7 @@
 
 namespace App\Controller\RH;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,14 +13,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashBoardController extends AbstractController
 {
   /**
-   * @Route("/", name="dash_board", schemes={"https"})
+   * @Route("/", name="dashboard", schemes={"https"})
    */
     public function index()
     {
-      $this->denyAccessUnlessGranted('ROLE_RH');
+      $user = $this->getUser();
+      $entityManager = $this->getDoctrine()->getManager();
+      $Alluser= $entityManager->getRepository(User::class)->findAll();
+
       return $this->render('dashboard/index.html.twig', [
-            'controller_name' => 'DashBoardController',
-            'user' => $this->getUser()
+            'user' => $user,
+            'users'=>$Alluser
         ]);
     }
 
@@ -30,8 +34,7 @@ class DashBoardController extends AbstractController
       {
           return $this->render('dash_board/index.html.twig', [
               'controller_name' => 'DashBoardController',
-              'user' => $this->getUser()
-        ]);
+          ]);
       }
 
       /**
@@ -41,7 +44,6 @@ class DashBoardController extends AbstractController
         {
             return $this->render('dash_board/index.html.twig', [
                 'controller_name' => 'DashBoardController',
-                'user' => $this->getUser()
             ]);
         }
 
@@ -52,7 +54,6 @@ class DashBoardController extends AbstractController
           {
               return $this->render('dash_board/index.html.twig', [
                   'controller_name' => 'DashBoardController',
-                  'user' => $this->getUser()
               ]);
           }
 

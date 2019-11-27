@@ -80,6 +80,17 @@ class GameController extends AbstractController
         $campagne= $entityManager->getRepository(UserByCampagne::class)->find($game);
         $chat = $campagne->getChats();
         $user = $this->getUser();
+        $upstat= $entityManager->getRepository(Stat::class)->findBy(['id_User' => $user]);
+        foreach ($upstat as $key => $value) {
+          $value->setCommunication(random_int(1, 10));
+          $value->setCriticalThinking(random_int(1, 10));
+          $value->setLeadership(random_int(1, 10));
+          $value->setPositiveAttitude(random_int(1, 10));
+          $value->setLeadership(random_int(1, 10));
+          $value->setWorkEthic(random_int(1, 10));
+        } 
+        $entityManager->persist($value);
+        $entityManager->flush();
 
           return $this->render('game/chat.html.twig', [
               'chat' => $chat,

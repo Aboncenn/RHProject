@@ -13,9 +13,9 @@
         height: 100%;
         padding: 5%;
         background-color: rgb(166, 147, 111);
-        margin: 1em auto; 
-        max-width: 800px; 
-        width: 95%; 
+        margin: 1em auto;
+        max-width: 800px;
+        width: 95%;
         font: 18px/1.5 sans-serif;
         display: flex;
         flex-direction: row;
@@ -37,11 +37,11 @@
     .bground h6{
         font: italic 1em "Fira Sans", serif;
     }
+    .bground h2 strong{
+        font: italic 0.6em "Fira Sans", serif;
+    }
     h1, h2 {
         text-align: center;
-    }
-    .chat {
-
     }
     .chat-box {
         padding: 10px;
@@ -79,12 +79,14 @@
         background-color: rgb(66, 63, 57);
         color: rgb(237, 216, 202);
         border: rgb(237, 216, 202) solid 1px;
-        
+        overflow-wrap: normal;
+        white-space: normal;
+        width: 100%;
     }
     .scenario-btn:hover{
         background-color: rgb(237, 216, 202);
         color: rgb(66, 63, 57);
-        border: rgb(66, 63, 57) solid 1px;   
+        border: rgb(66, 63, 57) solid 1px;
     }
     .context{
         font: italic 0.9em "Fira Sans", serif;
@@ -116,7 +118,7 @@
     <div class="body-wrapper">
         <div class="chat">
             <h2>Chat</h2>
-            <div class="chat-box"> 
+            <div class="chat-box">
                 <h6 class="chat-message-title"> Messages </h3>
                 <div class="chat-messages" id="messages">
 
@@ -127,7 +129,7 @@
                 <button class="btn btn-success chat-btn" id="send">Envoyer</button>
             </div>
         </div>
-        
+
         <div class="scenario">
             <h2>Scénario</h2>
             <div id="scenario-context" class="context">
@@ -287,16 +289,19 @@
                 url : "/game/chat.php",
                 type : "GET",
                 data : {"pseudo": user,"message": msg},
-            });    
-        });  
+            });
+        });
     });
 
     function reload(){
         setTimeout(function(){
-            var premierID = $('#messages p:first').attr('id'); // on récupère l'id le plus récent
+            var chat_id = document.getElementById("chat-id").innerHTML;
+            console.log(chat_id);
+            var premierID = $('#messages p:first').attr('id');
             $.ajax({
-                url : "/game/chat.php?id=" + premierID, // on passe l'id le plus récent au fichier de chargement
+                url : "/game/chat/" + chat_id + "/getChat", // on passe l'id le plus récent au fichier de chargement
                 type : "GET",
+                data: premierID,
                 success : function(html){
                     $('#messages').prepend(html);
                 }
@@ -316,7 +321,7 @@
     }
 
     function fill_buttons(id){
-        
+
         var element = document.getElementById("scenario-btn");
         var html = ""
         if(id == "-1"){
@@ -331,11 +336,14 @@
 
     function fill_game_scenario(id){
         fill_context(id);
-        fill_buttons(id); 
+        fill_buttons(id);
     }
 
     //reload();
     fill_game_scenario("1");
 </script>
+
+{% endblock %}
+{% block footer %}
 
 {% endblock %}

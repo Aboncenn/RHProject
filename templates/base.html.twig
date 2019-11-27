@@ -9,7 +9,7 @@
         {% block stylesheets %}
             <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-            <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
             <link href="{{ asset('css/main.css') }}" rel="stylesheet"/>
         {% endblock %}
     </head>
@@ -31,27 +31,32 @@
             <div class="collapse navbar-collapse" id="navbarLeft">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item {% if app.request.attributes.get('_route') starts with 'regle' %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('regle') }}" tabindex="-1" aria-disabled="true">Règles</a>
+                        <a class="nav-link" href="{{ path('regle') }}" tabindex="-1" aria-disabled="true"><i class="fas fa-briefcase"></i> Règles</a>
                     </li>
                     <li class="nav-item {% if app.request.attributes.get('_route') starts with 'avancementProjet' %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('avancementProjet') }}" tabindex="-1" aria-disabled="true">Avancement du projet</a>
+                        <a class="nav-link" href="{{ path('avancementProjet') }}" tabindex="-1" aria-disabled="true"><i class="fas fa-tasks"></i> Avancement du projet</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="myprofil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Menu RH
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="myprofil">
-                            <a class="dropdown-item" href="{{ path('campagne_index') }}" aria-disabled="true">Gestion des campagnes</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="myprofil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Menu joueur
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="myprofil">
-                            <a class="dropdown-item" href="{{ path('game') }}" aria-disabled="true">Liste des campagnes</a>
-                        </div>
-                    </li>
+                    {% if user.roles is defined  %}
+                        {% if user.roles is defined and 'ROLE_RH' in user.roles  %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-tools"></i> Menu RH
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="myprofil">
+                                    <a class="dropdown-item" href="{{ path('dashboard') }}" aria-disabled="true">Dashboard</a>
+                                    <a class="dropdown-item" href="{{ path('campagne_index') }}" aria-disabled="true">Gestion des campagnes</a>
+                                </div>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-chess-rook"></i> Menu joueur
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="myprofil">
+                                <a class="dropdown-item" href="{{ path('game') }}" aria-disabled="true">Mes parties</a>
+                            </div>
+                        </li>
+                    {% endif %}
                 </ul>
                 <ul class="navbar-nav my-2 my-lg-0">
                     {% if user is defined and user != null %}
@@ -62,15 +67,15 @@
                             <div class="dropdown-menu" aria-labelledby="myprofil">
                                 <a class="dropdown-item" href="{{ path('profile' , {id: user.id}) }}">{{ user.prenom }} {{ user.nom }}</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ path('logout') }}" aria-disabled="true">Se déconnecter</a>
+                                <a class="dropdown-item" href="{{ path('logout') }}" aria-disabled="true"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
                             </div>
                         </li>
                     {% else %}
                         <li class="nav-item {% if app.request.attributes.get('_route') starts with 'login' %}active{% endif %}">
-                            <a class="nav-link" href="{{ path('login') }}" aria-disabled="true">Se connecter</a>
+                            <a class="nav-link" href="{{ path('login') }}" aria-disabled="true"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
                         </li>
                         <li class="nav-item {% if app.request.attributes.get('_route') starts with 'register' %}active{% endif %}">
-                            <a class="nav-link" href="{{ path('register') }}" aria-disabled="true">Créer un compte</a>
+                            <a class="nav-link" href="{{ path('register') }}" aria-disabled="true"><i class="fas fa-plus-square"></i> Créer un compte</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -79,5 +84,20 @@
         <div class="container">
             {% block body %}{% endblock %}
         </div>
+        {% block footer %}
+          <footer class="mini-footer">
+           <div class="container">
+               <div class="row">
+                 <div class="col-md-12">
+                   <div class="copyright-text">
+                     <p>© 2019
+                       With love by Barbus.inc
+                     </p>
+                 </div>
+               </div>
+             </div>
+           </div>
+          </footer>
+{% endblock %}
     </body>
 </html>
