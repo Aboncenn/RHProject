@@ -9,7 +9,7 @@ body > nav .dropdown-menu {
 
 body > .container {
     margin-top: 65px;
-    min-height: calc(100vh - 160px);
+    min-height: calc(100vh - 144px);
 }
 
 .home > .row {
@@ -41,7 +41,7 @@ section.home img {
 .mini-footer {
  background:#192027;
  text-align:center;
- padding:32px 0;
+ padding:24px 0;
     margin-top: 5px;
 }
 .mini-footer p {
