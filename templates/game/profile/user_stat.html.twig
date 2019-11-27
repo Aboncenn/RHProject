@@ -1,16 +1,28 @@
-<div class="row">
+<div class="row" style="margin-top: 15px;">
     <div class="col-sm-6">
+        {% if stat is defined and stat != null %}
         <input id="profil-Communication" type="hidden" value="{{ stat.Communication }}" />
         <input id="profil-CriticalThinking" type="hidden" value="{{ stat.CriticalThinking }}" />
         <input id="profil-Leadership" type="hidden" value="{{ stat.Leadership }}" />
         <input id="profil-PositiveAttitude" type="hidden" value="{{ stat.PositiveAttitude }}" />
         <input id="profil-TeamWork" type="hidden" value="{{ stat.TeamWork }}" />
         <input id="profil-WorkEthic" type="hidden" value="{{ stat.WorkEthic }}" />
+        {% endif %}
 
         <canvas id="profile-radar" width="400" height="400"></canvas>
     </div>
     <div class="col-sm-6">
-        {{ dump(stat) }}
+        <h2 style="margin-bottom: 20px">Quelques stats</h2>
+        <dl>
+            <dt>Nombre de parties jouées</dt>
+            <dd>{{ random(1, 10) }}</dd>
+            <dt>Nombre de messages envoyés</dt>
+            <dd>{{ random(1, 100) }}</dd>
+            <dt>Nombre d'échanges avec d'autres utilisateurs</dt>
+            <dd>{{ random(1, 10) }}</dd>
+            <dt>Dernière connexion</dt>
+            <dd>{{ "now"|date("d-M-y H:m:s") }}</dd>
+        </dl>
     </div>
 </div>
 
