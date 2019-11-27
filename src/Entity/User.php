@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -59,6 +61,16 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\UserByCampagne", mappedBy="id_user")
      */
     private $userByCampagnes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="user")
+     */
+    private $text;
+
+    public function __construct()
+    {
+        $this->text = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -207,6 +219,37 @@ class User implements UserInterface
                 // set the owning side to null (unless already changed)
                 if ($userByCampagnes->getIdUser() === $this) {
                     $userByCampagnes->setIdUser(null);
+                }
+            }
+
+            return $this;
+        }
+
+        /**
+         * @return Collection|Message[]
+         */
+        public function getText(): Collection
+        {
+            return $this->text;
+        }
+
+        public function addText(Message $text): self
+        {
+            if (!$this->text->contains($text)) {
+                $this->text[] = $text;
+                $text->setUser($this);
+            }
+
+            return $this;
+        }
+
+        public function removeText(Message $text): self
+        {
+            if ($this->text->contains($text)) {
+                $this->text->removeElement($text);
+                // set the owning side to null (unless already changed)
+                if ($text->getUser() === $this) {
+                    $text->setUser(null);
                 }
             }
 
