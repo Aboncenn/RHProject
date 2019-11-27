@@ -10,6 +10,8 @@ use App\Entity\User;
 use App\Entity\UserByCampagne;
 use App\Entity\Campagne;
 use App\Entity\Chat;
+use App\Entity\Stat;
+
 /**
  * @Route("/game")
  * @Security("is_granted('ROLE_USER') or is_granted('ROLE_RH')")
@@ -92,9 +94,11 @@ class GameController extends AbstractController
       {
           $entityManager = $this->getDoctrine()->getManager();
           $user = $this->getUser();
+          $stat = $entityManager->getRepository(Stat::class)->find($user);
 
           return $this->render('game/profile.html.twig', [
               'user' => $user,
+              'stat' => $stat
           ]);
       }
 }
