@@ -5,6 +5,7 @@ namespace App\Controller\RH;
 use App\Entity\Campagne;
 use App\Form\CampagneType;
 use App\Repository\CampagneRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Route("/campagne", schemes={"https"})
+ * @Security("is_granted('ROLE_RH')")
  */
 class CampagneController extends AbstractController
 {

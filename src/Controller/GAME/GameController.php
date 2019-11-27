@@ -21,7 +21,6 @@ class GameController extends AbstractController
    */
     public function index()
     {
-      $this->denyAccessUnlessGranted('ROLE_USER');
       $entityManager = $this->getDoctrine()->getManager();
       $user = $this->getUser();
       $list_Campagne_started = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
