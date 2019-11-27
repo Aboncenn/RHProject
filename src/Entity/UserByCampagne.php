@@ -31,7 +31,7 @@ class UserByCampagne
     private $id_user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Chat", mappedBy="id_CampagnebyUser", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Chat", mappedBy="id_CampagnebyUser")
      */
     private $chats;
 

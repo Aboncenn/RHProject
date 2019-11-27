@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GameController!{% endblock %}
-
 {% block navprofil %}
     <ul class="navbar-nav justify-content-end">
         {% if user == null %}
@@ -42,11 +40,13 @@
     </div>
     {% endfor %}
     </div>
-    <div class="col-md-2">
-    Nouvelle campagne
-    </div>
     <div class="col-md-8">
-    liste des campagnes
+    liste des campagnes en cours
+    {% for campagne in list_campagne_started %}
+    <div><h6>{{ campagne.nom }}</h6>
+    <a href="{{ path ('chat', {game: campagne.id})}}"><button class="btn btn-primary"> relancer la campagne</button></a>
+    </div>
+    {% endfor %}
     </div>
     <div class="col-md-2">
     badges

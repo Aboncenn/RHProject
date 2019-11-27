@@ -23,15 +23,19 @@ class GameController extends AbstractController
       $entityManager = $this->getDoctrine()->getManager();
       $user = $this->getUser();
       $list_Campagne_started = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
-
+      $list_campagne_started = [];
+      foreach ($list_Campagne_started as $key => $campagne) {
+        $d['nom']= $campagne->getIdCampagne()->getNom();
+        $d['id'] =$campagne->getId();
+        array_push($list_campagne_started, $d);
+      }
       $list_Campagne = $entityManager->getRepository(Campagne::class)->findAll();
-      dump($list_Campagne_started);
       $entityManager = $this->getDoctrine()->getManager();
       $getuser = $entityManager->getRepository(User::class)->find($user);
 
         return $this->render('game/index.html.twig', [
             'list_campagne' => $list_Campagne,
-  //          'list_campagne_started' =>$list_Campagne_started,
+            'list_campagne_started' =>$list_campagne_started,
             'user'=> $user
         ]);
     }
@@ -42,6 +46,7 @@ class GameController extends AbstractController
       {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $entityManager = $this->getDoctrine()->getManager();
+
         $campagne = $entityManager->getRepository(Campagne::class)->find($request->request->get('IdCampagne'));
         $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
         $usercampagne = new UserByCampagne();
@@ -49,30 +54,30 @@ class GameController extends AbstractController
         $datetime= new \DateTime;
         $chat->setText('bienvenu !');
         $chat->setDatetime($datetime);
+        $entityManager->persist($chat);
         $usercampagne->setIdCampagne($campagne);
         $usercampagne->setIdUser($user);
         $usercampagne->addChat($chat);
-        $entityManager->persist($chat);
-      //  $usercampagne->setDescription('Ergonomic and stylish!');
         $entityManager->persist($usercampagne);
         $entityManager->flush();
-        return $this->render('game/chat.html.twig',);
+
+        return $this->render('game/chat.html.twig');
       }
 
     /**
-     * @Route("/chat", name="chat",methods={"GET", "POST"}, requirements={"user "="\d+"})
+     * @Route("/chat/{game}", name="chat",methods={"GET", "POST"}, requirements={"game "="\d+"})
      */
-      public function chat()
+      public function chat($game)
       {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $entityManager = $this->getDoctrine()->getManager();
-        $message = $entityManager->getRepository(Stats::class)->findByUser($user);
+        $campagne= $entityManager->getRepository(UserByCampagne::class)->find($game);
+        $chat = $campagne->getChats();
+        $user = $this->getUser()->getUsername();
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-        }
-          return $this->render('game/index.html.twig', [
-              'controller_name' => 'GameController',
+          return $this->render('game/chat.html.twig', [
+              'chat' => $chat,
+              'user' => $user
           ]);
       }
 
