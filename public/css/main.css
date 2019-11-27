@@ -1,0 +1,22 @@
+
+body {
+    height: calc(100vh - 65px);
+    width: 100vw;
+}
+
+body > nav .dropdown-menu {
+    left: -37px;
+}
+
+body > .container {
+    margin-top: 65px;
+    height: calc(100vh - 101px);
+}
+
+.home > .row {
+    padding-top: 50px;
+}
+
+section.home img {
+    margin-top: 50px;
+}
