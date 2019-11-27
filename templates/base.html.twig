@@ -36,7 +36,15 @@
                             Menu RH
                         </a>
                         <div class="dropdown-menu" aria-labelledby="myprofil">
-                            <a class="dropdown-item" href="{{ path('campagne_index') }}" aria-disabled="true">Liste des campagnes</a>
+                            <a class="dropdown-item" href="{{ path('campagne_index') }}" aria-disabled="true">Gestion des campagnes</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="myprofil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu joueur
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="myprofil">
+                            <a class="dropdown-item" href="{{ path('game') }}" aria-disabled="true">Liste des campagnes</a>
                         </div>
                     </li>
                 </ul>
