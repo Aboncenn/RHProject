@@ -77,18 +77,12 @@ class GameController extends AbstractController
       }
 
     /**
-     * @Route("/profile/{id}", name="profile",methods={"GET"}, requirements={"id"="\d+"}, schemes={"https"})
+     * @Route("/profile", name="profile", schemes={"https"})
      */
-      public function profile(int $id)
+      public function profile()
       {
-        $entityManager = $this->getDoctrine()->getManager();
-        $user = $entityManager->getRepository(Stats::class)->findByUser($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException(
-                'No user found for id '.$id
-            );
-        }
+          $entityManager = $this->getDoctrine()->getManager();
+          $user = $this->getUser();
 
           return $this->render('game/profile.html.twig', [
               'user' => $user,
