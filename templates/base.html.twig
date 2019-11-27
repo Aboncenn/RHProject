@@ -39,7 +39,7 @@
                     {% if user.roles is defined  %}
                         {% if user.roles is defined and 'ROLE_RH' in user.roles  %}
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="myprofil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Menu RH
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="myprofil">
@@ -47,16 +47,15 @@
                                     <a class="dropdown-item" href="{{ path('campagne_index') }}" aria-disabled="true">Gestion des campagnes</a>
                                 </div>
                             </li>
-                        {% else %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="myprofil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Menu joueur
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="myprofil">
-                                    <a class="dropdown-item" href="{{ path('game') }}" aria-disabled="true">Liste des campagnes</a>
-                                </div>
-                            </li>
                         {% endif %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu joueur
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="myprofil">
+                                <a class="dropdown-item" href="{{ path('game') }}" aria-disabled="true">Liste des campagnes</a>
+                            </div>
+                        </li>
                     {% endif %}
                 </ul>
                 <ul class="navbar-nav my-2 my-lg-0">
