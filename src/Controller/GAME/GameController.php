@@ -2,6 +2,7 @@
 
 namespace App\Controller\GAME;
 
+use App\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -126,5 +127,25 @@ class GameController extends AbstractController
               'stat' => $stat
           ]);
       }
+
+
+    /**
+     * @Route("/profile/{id}/edit", name="profile_edit", methods={"POST"}, schemes={"https"})
+     */
+    public function edit(Request $request, int $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->find($id);
+        /*
+                $form = $this->createForm(UserType::class, $user);
+                die(var_dump($request->request));
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $entityManager->flush();
+                }
+        */
+        return $this->redirectToRoute('profile', ['id' => $id]);
+    }
 
 }

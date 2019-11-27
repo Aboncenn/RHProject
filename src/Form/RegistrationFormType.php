@@ -87,6 +87,12 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('cguOK', CheckboxType::class, [
+                'mapped' => false,
+                'label'    => 'Veuillez accepter nos cgu',
+                'required' => true,
+                'value' => false
+            ])
             ->add('isRH', CheckboxType::class, [
                 'mapped' => false,
                 'label'    => 'Etes vous un compte RH ?',
