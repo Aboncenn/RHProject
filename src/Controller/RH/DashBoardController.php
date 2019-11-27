@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashBoardController extends AbstractController
 {
   /**
-   * @Route("/", name="dash_board", schemes={"https"})
+   * @Route("/", name="dashboard", schemes={"https"})
    */
     public function index()
     {
