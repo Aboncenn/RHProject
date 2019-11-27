@@ -20,3 +20,11 @@ body > .container {
 section.home img {
     margin-top: 50px;
 }
+
+.myprofile {
+    padding-top: 25px;
+}
+
+#profile-form {
+    margin-top: 15px;
+}
