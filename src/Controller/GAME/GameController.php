@@ -102,12 +102,12 @@ class GameController extends AbstractController
         }
 
     /**
-     * @Route("/profile", name="profile", schemes={"https"})
+     * @Route("/profile/{id}", name="profile", schemes={"https"})
      */
-      public function profile()
+      public function profile(int $id)
       {
           $entityManager = $this->getDoctrine()->getManager();
-          $user = $this->getUser();
+          $user = $entityManager->getRepository(User::class)->find($id);
           $stat = $entityManager->getRepository(Stat::class)->find($user);
 
           return $this->render('game/profile.html.twig', [

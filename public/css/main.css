@@ -28,3 +28,8 @@ section.home img {
 #profile-form {
     margin-top: 15px;
 }
+
+#profile-radar {
+    max-height: 400px;
+    max-width: 400px;
+}
