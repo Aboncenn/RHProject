@@ -13,12 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashBoardController extends AbstractController
 {
   /**
-   * @Route("/", name="dash_board", schemes={"https"})
+   * @Route("/", name="dashboard", schemes={"https"})
    */
     public function index()
     {
       $user = $this->getUser();
-      $Alluser= $entityManager->getRepository(UserRepository::class)->findAll();
+      $entityManager = $this->getDoctrine()->getManager();
+      $Alluser= $entityManager->getRepository(User::class)->findAll();
 
       return $this->render('dashboard/index.html.twig', [
             'user' => $user,
