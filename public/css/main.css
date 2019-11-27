@@ -1,3 +1,4 @@
+
 body {
     height: calc(100vh - 65px);
     width: 100vw;
@@ -7,14 +8,13 @@ body > nav .dropdown-menu {
     left: -37px;
 }
 
-body > section {
+body > .container {
     margin-top: 65px;
     height: calc(100vh - 101px);
 }
 
-section.home > .row {
-    position: relative;
-    top: 50px;
+.home > .row {
+    padding-top: 50px;
 }
 
 section.home img {
