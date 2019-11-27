@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="login")
+     * @Route("/login", name="login", schemes={"https"})
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
@@ -19,7 +19,7 @@ class SecurityController extends AbstractController
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
-        // }²²²
+        // }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -30,7 +30,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="logout")
+     * @Route("/logout", name="logout", schemes={"https"})
      */
     public function logout()
     {

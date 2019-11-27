@@ -9,7 +9,6 @@ use App\Entity\User;
 use App\Entity\UserByCampagne;
 use App\Entity\Campagne;
 use App\Entity\Chat;
-
 /**
  * @Route("/game")
  */
@@ -23,16 +22,16 @@ class GameController extends AbstractController
       $this->denyAccessUnlessGranted('ROLE_USER');
       $entityManager = $this->getDoctrine()->getManager();
       $user = $this->getUser();
-    //  $list_Campagne_started = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
-     $list_Campagne_started = $entityManager->getRepository(Campagne::class)->find(1)->getCampagneByUser()->toArray();
-      $list_Campagne = $entityManager->getRepository(Campagne::class)->findAll();
+      $list_Campagne_started = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
 
+      $list_Campagne = $entityManager->getRepository(Campagne::class)->findAll();
+      dump($list_Campagne_started);
       $entityManager = $this->getDoctrine()->getManager();
       $getuser = $entityManager->getRepository(User::class)->find($user);
 
         return $this->render('game/index.html.twig', [
             'list_campagne' => $list_Campagne,
-            'list_campagne_started' =>$list_Campagne_started,
+  //          'list_campagne_started' =>$list_Campagne_started,
             'user'=> $user
         ]);
     }
@@ -47,8 +46,13 @@ class GameController extends AbstractController
         $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
         $usercampagne = new UserByCampagne();
         $chat = new Chat();
+        $datetime= new \DateTime;
+        $chat->setText('bienvenu !');
+        $chat->setDatetime($datetime);
         $usercampagne->setIdCampagne($campagne);
         $usercampagne->setIdUser($user);
+        $usercampagne->addChat($chat);
+        $entityManager->persist($chat);
       //  $usercampagne->setDescription('Ergonomic and stylish!');
         $entityManager->persist($usercampagne);
         $entityManager->flush();

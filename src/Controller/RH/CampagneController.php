@@ -12,12 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @Route("/campagne")
+ * @Route("/campagne", schemes={"https"})
  */
 class CampagneController extends AbstractController
 {
     /**
-     * @Route("/", name="campagne_index", methods={"GET"})
+     * @Route("/", name="campagne_index", methods={"GET"}, schemes={"https"})
      */
     public function index(CampagneRepository $campagneRepository): Response
     {
@@ -27,7 +27,7 @@ class CampagneController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="campagne_new", methods={"GET","POST"})
+     * @Route("/new", name="campagne_new", methods={"GET","POST"}, schemes={"https"})
      */
     public function new(Request $request): Response
     {
@@ -50,7 +50,7 @@ class CampagneController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="campagne_show", methods={"GET"})
+     * @Route("/{id}", name="campagne_show", methods={"GET"}, schemes={"https"})
      */
     public function show(Campagne $campagne): Response
     {
@@ -60,7 +60,7 @@ class CampagneController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="campagne_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="campagne_edit", methods={"GET","POST"}, schemes={"https"})
      */
     public function edit(Request $request, Campagne $campagne): Response
     {
@@ -80,7 +80,7 @@ class CampagneController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="campagne_delete", methods={"DELETE"})
+     * @Route("/{id}", name="campagne_delete", methods={"DELETE"}, schemes={"https"})
      */
     public function delete(Request $request, Campagne $campagne): Response
     {

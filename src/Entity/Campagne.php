@@ -85,7 +85,7 @@ class Campagne
     /**
      * @return Collection|UserByCampagnes[]
      */
-    public function getCampagneByUser(): Collection
+    public function getCampagneByUser()
     {
         return $this->campagneByUser;
     }
