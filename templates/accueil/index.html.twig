@@ -3,7 +3,7 @@
 {% block body %}
     <section class="home">
         <div class="row justify-content-center">
-            <h1>Bienvenue sur RH Project Game {% if user %}{{ user.username }}{% endif %}!</h1>
+            <h1>Bienvenue sur RH Project Game {% if user is defined %}{{ user.prenom }} {{ user.nom }}{% endif %}!</h1>
 
             <img src="{{ asset('images/logo.png') }}" alt="RH Project Game" />
         </div>
