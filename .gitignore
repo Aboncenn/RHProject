@@ -12,7 +12,12 @@
 .phpunit
 .phpunit.result.cache
 /phpunit.xml
+/phpunit-dist.xml
 ###< symfony/phpunit-bridge ###
 /nbproject/private/
 /.env
 /.idea
+/.env.test
+/RHProjext.iml
+/symfony.lock
+/composer.lock
