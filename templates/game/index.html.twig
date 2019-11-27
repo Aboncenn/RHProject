@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h3>Nouvelle campagne</h3>
+    <h3>Nouvelle partie</h3>
     <div class="row">
         {% for campagne in list_campagne %}
             <div class="col-md-6 col-xl-3">
@@ -20,7 +20,7 @@
         {% endfor %}
     </div>
     <hr/>
-    <h3>Campagnes en cours</h3>
+    <h3>Parties en cours</h3>
     <div class="row">
         {% for campagne in list_campagne_started %}
             <div class="col-md-6 col-xl-3">
@@ -28,7 +28,7 @@
                     <img class="card-img-top" src="{{ asset('images/') ~ 'aventure' ~ random('0123456789') ~ '.png'}}" alt="Illustration de l'aventure">
                     <div class="card-body">
                         <h5 class="card-title">{{ campagne.nom }}</h5>
-                        <a href="{{ path ('chat', {game: campagne.id})}}" class="btn btn-success"><i class="fa fa-play-circle"></i> Relancer la campagne</a>
+                        <a href="{{ path ('chat', {game: campagne.id})}}" class="btn btn-success"><i class="fa fa-play-circle"></i> Relancer la partie</a>
                     </div>
                 </div>
             </div>
