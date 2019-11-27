@@ -23,8 +23,8 @@
                 <td>{{ campagne.description }}</td>
                 <td>{{ campagne.path }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('campagne_show', {'id': campagne.id}) }}" title="Afficher"><i class="fa fa-eye"></i></a>
-                    <a class="btn btn-primary" href="{{ path('campagne_edit', {'id': campagne.id}) }}" title="Modifier"><i class="fa fa-pencil"></i></a>
+                    <a class="btn btn-primary" href="{{ path('campagne_show', {'id': campagne.id}) }}" title="Afficher"><i class="fas fa-eye"></i></a>
+                    <a class="btn btn-primary" href="{{ path('campagne_edit', {'id': campagne.id}) }}" title="Modifier"><i class="fas fa-pencil"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('campagne_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Créer une campagne</a>
+    <a href="{{ path('campagne_new') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Créer une campagne</a>
 {% endblock %}

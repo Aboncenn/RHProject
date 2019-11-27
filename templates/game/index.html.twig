@@ -12,7 +12,7 @@
                         <p class="card-text">{{ campagne.description }}</p>
                         <form action="{{ path('newgame') }}" method="POST">
                             <input  name="IdCampagne" type="hidden" value="{{ campagne.id }}">
-                            <button class="btn btn-light"><i class="fa fa-plus-circle"></i> Créer</button>
+                            <button class="btn btn-light"><i class="fas fa-plus-circle"></i> Créer</button>
                         </form>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                     <img class="card-img-top" src="{{ asset('images/') ~ 'aventure' ~ random('0123456789') ~ '.png'}}" alt="Illustration de l'aventure">
                     <div class="card-body">
                         <h5 class="card-title">{{ campagne.nom }}</h5>
-                        <a href="{{ path ('chat', {game: campagne.id})}}" class="btn btn-success"><i class="fa fa-play-circle"></i> Reprendre la partie</a>
+                        <a href="{{ path ('chat', {game: campagne.id})}}" class="btn btn-success"><i class="fas fa-play-circle"></i> Reprendre la partie</a>
                     </div>
                 </div>
             </div>
