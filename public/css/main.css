@@ -9,7 +9,7 @@ body > nav .dropdown-menu {
 
 body > .container {
     margin-top: 65px;
-    min-height: calc(100vh - 144px);
+    min-height: calc(100vh - 115px);
 }
 
 .home > .row {
