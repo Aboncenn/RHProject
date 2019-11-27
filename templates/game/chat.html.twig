@@ -327,7 +327,7 @@
     function fill_context(id){
         var element = document.getElementById("scenario-context");
         if(id == "-1"){
-            element.innerHTML = '<a href="/game" class="href-button">Retour à la liste de jeux</a>';
+            element.innerHTML = '<a href="{{ path('game') }}" class="href-button">Retour à la liste des parties</a>';
             return false;
         }
         element.innerHTML = "<p> " + COMPAIGN[id]["context"] + "</p>";
