@@ -28,6 +28,12 @@ section.home img {
 #profile-form {
     margin-top: 15px;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
 .mini-footer {
  background:#192027;
  text-align:center;
