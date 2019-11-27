@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Stat;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
@@ -60,6 +61,11 @@ class RegistrationController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
+
+            $stats = new Stat();
+            $stats->setIdUser($user);
+            $entityManager->persist($stats);
+
             $entityManager->flush();
 
             // do anything else you need here, like send an email

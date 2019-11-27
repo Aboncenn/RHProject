@@ -90,6 +90,8 @@ class RegistrationFormType extends AbstractType
             ->add('isRH', CheckboxType::class, [
                 'mapped' => false,
                 'label'    => 'Etes vous un compte RH ?',
+                'label_attr' => ['style' => 'display: none'],
+                'attr' => ['style' => 'display: none'],
                 'required' => false,
                 'value' => true
             ]);

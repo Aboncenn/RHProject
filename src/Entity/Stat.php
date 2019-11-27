@@ -24,33 +24,34 @@ class Stat
 
     /**
      * @ORM\Column(type="float")
+     * @ORM\Column
      */
-    private $Communication;
+    private $Communication = 0.0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $CriticalThinking;
+    private $CriticalThinking = 0.0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $Leadership;
+    private $Leadership = 0.0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $PositiveAttitude;
+    private $PositiveAttitude = 0.0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $TeamWork;
+    private $TeamWork = 0.0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $WorkEthic;
+    private $WorkEthic = 0.0;
 
     public function getId(): ?int
     {

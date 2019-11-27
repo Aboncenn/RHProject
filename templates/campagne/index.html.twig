@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Campagne index{% endblock %}
+{% block title %}Liste des campagnes{% endblock %}
 
 {% block body %}
-    <h1>Campagne index</h1>
+    <h1>Liste des campagnes</h1>
 
-    <table class="table">
+    <table class="table table-stripped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Path</th>
-                <th>actions</th>
+                <th>Chemin</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +23,8 @@
                 <td>{{ campagne.description }}</td>
                 <td>{{ campagne.path }}</td>
                 <td>
-                    <a href="{{ path('campagne_show', {'id': campagne.id}) }}">Afficher</a>
-                    <a href="{{ path('campagne_edit', {'id': campagne.id}) }}">Modifier</a>
+                    <a class="btn btn-primary" href="{{ path('campagne_show', {'id': campagne.id}) }}" title="Afficher"><i class="fa fa-eye"></i></a>
+                    <a class="btn btn-primary" href="{{ path('campagne_edit', {'id': campagne.id}) }}" title="Modifier"><i class="fa fa-pencil"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('campagne_new') }}">Créer une campagne</a>
+    <a href="{{ path('campagne_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Créer une campagne</a>
 {% endblock %}
