@@ -18,7 +18,8 @@ class DashBoardController extends AbstractController
     public function index()
     {
       $user = $this->getUser();
-      $Alluser= $entityManager->getRepository(UserRepository::class)->findAll();
+      $entityManager = $this->getDoctrine()->getManager();
+      $Alluser= $entityManager->getRepository(User::class)->findAll();
 
       return $this->render('dashboard/index.html.twig', [
             'user' => $user,

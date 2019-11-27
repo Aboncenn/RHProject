@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DashBoardController!{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block body %}
 <style>
@@ -9,15 +9,11 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
+    <h1> Utilisateurs </h1>
     <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/RHProject/src/Controller/DashBoardController.php'|file_link(0) }}">src/Controller/DashBoardController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/RHProject/templates/dash_board/index.html.twig'|file_link(0) }}">templates/dash_board/index.html.twig</a></code></li>
-    </ul>
-    {% for user in users %}
-    <p>user.username</p>
+    {% for user_item in users %}
+        <li><a href="/game/profile?id={{user_item.id}}"><strong>{{user_item.username}}</strong></a></li>
     {% endfor %}
+    </ul>
 </div>
 {% endblock %}
