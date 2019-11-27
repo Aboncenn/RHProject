@@ -13,9 +13,9 @@
         height: 100%;
         padding: 5%;
         background-color: rgb(166, 147, 111);
-        margin: 1em auto; 
-        max-width: 800px; 
-        width: 95%; 
+        margin: 1em auto;
+        max-width: 800px;
+        width: 95%;
         font: 18px/1.5 sans-serif;
         display: flex;
         flex-direction: row;
@@ -80,12 +80,12 @@
         color: rgb(237, 216, 202);
         border: rgb(237, 216, 202) solid 1px;
         overflow: auto;
-        
+
     }
     .scenario-btn:hover{
         background-color: rgb(237, 216, 202);
         color: rgb(66, 63, 57);
-        border: rgb(66, 63, 57) solid 1px;   
+        border: rgb(66, 63, 57) solid 1px;
     }
     .context{
         font: italic 0.9em "Fira Sans", serif;
@@ -117,7 +117,7 @@
     <div class="body-wrapper">
         <div class="chat">
             <h2>Chat</h2>
-            <div class="chat-box"> 
+            <div class="chat-box">
                 <h6 class="chat-message-title"> Messages </h3>
                 <div class="chat-messages" id="messages">
 
@@ -128,7 +128,7 @@
                 <button class="btn btn-success chat-btn" id="send">Envoyer</button>
             </div>
         </div>
-        
+
         <div class="scenario">
             <h2>Scénario</h2>
             <div id="scenario-context" class="context">
@@ -288,8 +288,8 @@
                 url : "/game/chat.php",
                 type : "GET",
                 data : {"pseudo": user,"message": msg},
-            });    
-        });  
+            });
+        });
     });
 
     function reload(){
@@ -320,7 +320,7 @@
     }
 
     function fill_buttons(id){
-        
+
         var element = document.getElementById("scenario-btn");
         var html = ""
         if(id == "-1"){
@@ -335,11 +335,14 @@
 
     function fill_game_scenario(id){
         fill_context(id);
-        fill_buttons(id); 
+        fill_buttons(id);
     }
 
     //reload();
     fill_game_scenario("1");
 </script>
+
+{% endblock %}
+{% block footer %}
 
 {% endblock %}
