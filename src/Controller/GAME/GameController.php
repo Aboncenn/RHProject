@@ -137,12 +137,12 @@ class GameController extends AbstractController
 
           if ($form->isSubmitted() && $form->isValid()) {
               $this->getDoctrine()->getManager()->flush();
-
               return $this->redirectToRoute('profile', [
                   'userAffiche' => $userAffiche,
                   'user' => $this->getUser(),
                   'stat' => $stat,
-                  'nbparties' => count($nbparties)
+                  'nbparties' => count($nbparties),
+                  'form' => $form->createView()
               ]);
           }
 
@@ -164,15 +164,14 @@ class GameController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->find($id);
-        /*
+/*
                 $form = $this->createForm(UserType::class, $user);
                 die(var_dump($request->request));
                 $form->handleRequest($request);
 
                 if ($form->isSubmitted() && $form->isValid()) {
                     $entityManager->flush();
-                }
-        */
+                }*/
         return $this->redirectToRoute('profile', ['id' => $id]);
     }
 
@@ -221,5 +220,20 @@ class GameController extends AbstractController
             ['content-type' => 'text/html']
         );
     }
+
+     /**
+      * @Route("/{id}", name="user_delete", methods={"DELETE"}, schemes={"https"})
+      */
+     public function delete(Request $request, User $user): Response
+     {
+         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+             $entityManager = $this->getDoctrine()->getManager();
+             $entityManager->remove($user);
+             $entityManager->flush();
+         }
+
+         return $this->redirectToRoute('index');
+     }
+
 
 }
