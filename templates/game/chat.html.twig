@@ -129,6 +129,7 @@
 <div class="bground">
     <h1>Page de jeu de <strong id="user">{{ user.username }}</strong></h1>
     <input id="chat-userid" type="hidden" value="{{ user.id }}" />
+    <h2>Partie n°<strong id="campagne_user_id">{{ campagne_user_id }}</strong></h2>
     <div class="body-wrapper">
         <div class="chat">
             <h2>Chat</h2>
@@ -467,8 +468,9 @@
 
     function fill_context(id){
         var element = document.getElementById("scenario-context");
+        var c_u_id = document.getElementById('campagne_user_id').innerHTML;
         if(id == "-1"){
-            element.innerHTML = '<a href="{{ path('game') }}" class="href-button">Retour à la liste des parties</a>';
+            element.innerHTML = '<a href="{{ path('game') }}?done=true&campagne=' + c_u_id + '" class="href-button">Retour à la liste des parties</a>';
             return false;
         }
         element.innerHTML = "<p> " + COMPAIGN[id]["context"] + "</p>";

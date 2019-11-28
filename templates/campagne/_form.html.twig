@@ -1,4 +1,7 @@
 {{ form_start(form) }}
+        {{ form_row(form.nom, { 'label': 'Nom' }) }}
+        {{ form_row(form.description, { 'label': 'Description' }) }}
+        {{ form_row(form.path, { 'label': 'Scénario' }) }}
     {{ form_widget(form) }}
     <button class="btn btn-success"><i class="fas fa-save"></i> {{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

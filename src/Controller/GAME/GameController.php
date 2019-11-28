@@ -25,16 +25,33 @@ class GameController extends AbstractController
    */
     public function index()
     {
+
       $entityManager = $this->getDoctrine()->getManager();
       $user = $this->getUser();
+
+      if (isset($_GET['done'])){
+        if (isset($_GET['campagne'])){
+          $campagne_user_id = $_GET['campagne'];
+          $campagne_done = $entityManager->getRepository(UserByCampagne::class)->find($campagne_user_id);
+          $campagne_done->setFinished(True);
+          $entityManager->persist($campagne_done);
+          $entityManager->flush();
+          dump($campagne_done);
+
+        }
+      }
+      
       $list_Campagne_started = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
       $list_campagne_started = [];
+
       foreach ($list_Campagne_started as $key => $campagne) {
         $d['nom']= $campagne->getIdCampagne()->getNom();
         $d['id'] =$campagne->getId();
+        $d['finished'] =$campagne->getFinished();
         array_push($list_campagne_started, $d);
       }
       $list_Campagne = $entityManager->getRepository(Campagne::class)->findAll();
+      
       $entityManager = $this->getDoctrine()->getManager();
       $getuser = $entityManager->getRepository(User::class)->find($user);
 
@@ -68,7 +85,8 @@ class GameController extends AbstractController
 
         return $this->render('game/chat.html.twig', [
             'chat' => $chat,
-            'user' => $user
+            'user' => $user,
+            'campagne_user_id' => $usercampagne->getId(),
         ]);
       }
 
@@ -85,7 +103,8 @@ class GameController extends AbstractController
 
           return $this->render('game/chat.html.twig', [
               'chat' => $chat,
-              'user' => $user
+              'user' => $user,
+              'campagne_user_id' => $campagne->getId(),
           ]);
       }
       /**

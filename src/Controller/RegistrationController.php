@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use App\Service\StringTool;
 
 class RegistrationController extends AbstractController
 {
@@ -23,7 +24,7 @@ class RegistrationController extends AbstractController
      * @param LoginFormAuthenticator $authenticator
      * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, StringTool $convertstring): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -44,10 +45,10 @@ class RegistrationController extends AbstractController
                 $form->get('email')->getData()
             );
             $user->setNom(
-                $form->get('lastname')->getData()
+              $convertstring->getUpperFirstName($form->get('lastname')->getData())
             );
             $user->setPrenom(
-                $form->get('firstname')->getData()
+                $convertstring->getUpperFirstName($form->get('firstname')->getData())
             );
             if($form->get('isRH')->getData() == true ){
               $user->setRoles(
@@ -77,7 +78,6 @@ class RegistrationController extends AbstractController
                 'main' // firewall name in security.yaml
             );
         }
-
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
             'user' => $this->getUser()
