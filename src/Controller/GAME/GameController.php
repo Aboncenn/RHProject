@@ -36,8 +36,6 @@ class GameController extends AbstractController
           $campagne_done->setFinished(True);
           $entityManager->persist($campagne_done);
           $entityManager->flush();
-          dump($campagne_done);
-
         }
       }
       
@@ -114,7 +112,6 @@ class GameController extends AbstractController
         {
             $chatid = $request->request->get('chatid');
             $messages = $request->request->get('message');
-            var_dump($chatid, $messages);
           $this->denyAccessUnlessGranted('ROLE_USER');
           $entityManager = $this->getDoctrine()->getManager();
           $Allmessenger= $entityManager->getRepository(MessageRepository::class)->getMessage($chatid,$idmessage);
