@@ -20,10 +20,12 @@
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
+        border-radius: 3%;
     }
     .bground h1{
         color: white;
         font: italic 3em "Fira Sans", serif;
+        padding: 10px;
     }
 
     .bground h2, h3, h4, h5, h6{
@@ -129,7 +131,7 @@
 <div class="bground">
     <h1>Page de jeu de <strong id="user">{{ user.username }}</strong></h1>
     <input id="chat-userid" type="hidden" value="{{ user.id }}" />
-    <h2>Partie n°<strong id="campagne_user_id">{{ campagne_user_id }}</strong></h2>
+    <h2 style="display: none">Partie n°<strong id="campagne_user_id">{{ campagne_user_id }}</strong></h2>
     <div class="body-wrapper">
         <div class="chat">
             <h2>Chat</h2>
