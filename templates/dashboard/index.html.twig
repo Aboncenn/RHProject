@@ -14,7 +14,7 @@
             {% for user_item in users %}
                 <li>
                     <a href="{{ asset('game/') ~ 'profile/' ~ user_item.id }}">
-                        <strong>{{user_item.nom}} {{user_item.prenom}}</strong>
+                        <strong>{{user_item.prenom}} {{user_item.nom}}</strong>
                     </a>
                 </li>
             {% endfor %}
