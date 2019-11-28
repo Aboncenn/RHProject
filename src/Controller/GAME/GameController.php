@@ -129,11 +129,13 @@ class GameController extends AbstractController
       {
           $entityManager = $this->getDoctrine()->getManager();
           $user = $entityManager->getRepository(User::class)->find($id);
+          $nbparties = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->GetId()]);
           $stat = $entityManager->getRepository(Stat::class)->find($user);
 
           return $this->render('game/profile.html.twig', [
               'user' => $user,
-              'stat' => $stat
+              'stat' => $stat,
+              'nbparties' => count($nbparties)
           ]);
       }
 
