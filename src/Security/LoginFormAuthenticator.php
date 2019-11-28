@@ -86,6 +86,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
+        $user = $token->getUser();
+        $user->setConnectionDate(new \DateTime('now'));
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
         return new RedirectResponse($this->router->generate('game'));
     }
 

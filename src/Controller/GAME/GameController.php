@@ -136,7 +136,7 @@ class GameController extends AbstractController
               'userAffiche' => $userAffiche,
               'user' => $this->getUser(),
               'stat' => $stat,
-              'nbparties' => count($nbparties)
+              'nbparties' => count($nbparties),
           ]);
       }
 

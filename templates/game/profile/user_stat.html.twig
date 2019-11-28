@@ -21,7 +21,7 @@
             <dt>Nombre d'échanges avec d'autres utilisateurs</dt>
             <dd>{{ random(1, 10) }}</dd>
             <dt>Dernière connexion</dt>
-            <dd>{{ "now"|date("d-M-y H:m:s") }}</dd>
+            <dd>{{ user.connectiondate.date }}</dd>
         </dl>
     </div>
 </div>

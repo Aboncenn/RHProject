@@ -67,6 +67,16 @@ class User implements UserInterface
      */
     private $text;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $connection_date;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $LinkGithub;
+
     public function __construct()
     {
         $this->text = new ArrayCollection();
@@ -252,6 +262,30 @@ class User implements UserInterface
                     $text->setUser(null);
                 }
             }
+
+            return $this;
+        }
+
+        public function getConnectionDate(): ?\DateTimeInterface
+        {
+            return $this->connection_date;
+        }
+
+        public function setConnectionDate(?\DateTimeInterface $connection_date): self
+        {
+            $this->connection_date = $connection_date;
+
+            return $this;
+        }
+
+        public function getLinkGithub(): ?string
+        {
+            return $this->LinkGithub;
+        }
+
+        public function setLinkGithub(?string $LinkGithub): self
+        {
+            $this->LinkGithub = $LinkGithub;
 
             return $this;
         }
