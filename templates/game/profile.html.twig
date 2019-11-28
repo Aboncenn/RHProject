@@ -10,20 +10,20 @@
         <div class="col-sm-10">
             <h1>{{ userAffiche.prenom }} {{ userAffiche.nom }}</h1>
             <ul class="nav nav-tabs" id="profile-tab" role="tablist">
-                {% if userAffiche is defined and userAffiche.roles[1] is not defined %}
-                <li class="nav-item">
-                    <a class="nav-link {% if userAffiche is defined and userAffiche.roles[1] is not defined %}active{% endif %}" id="home-tab" data-toggle="tab" href="#dashboard" role="tab" aria-controls="home" aria-selected="true">Compétences</a>
-                </li>
+                {% if nbparties is defined and nbparties > 0 %}
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#dashboard" role="tab" aria-controls="home" aria-selected="true">Compétences</a>
+                    </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link {% if userAffiche is defined and userAffiche.roles[1] is defined %}active{% endif %}" id="profile-tab" data-toggle="tab" href="#about" role="tab" aria-controls="profile" aria-selected="false">A propos</a>
+                    <a class="nav-link {% if nbparties is not defined or nbparties == 0 %}active{% endif %}" id="profile-tab" data-toggle="tab" href="#about" role="tab" aria-controls="profile" aria-selected="false">A propos</a>
                 </li>
             </ul>
             <div class="tab-content" id="profile-tabcontent">
-                <div class="tab-pane fade  {% if userAffiche is defined and userAffiche.roles[1] is not defined %}show active{% endif %}" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                <div class="tab-pane fade {% if nbparties is defined and nbparties > 0 %}show active{% endif %}" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                     {{ include('game/profile/user_stat.html.twig') }}
                 </div>
-                <div class="tab-pane fade  {% if userAffiche is defined and userAffiche.roles[1] is defined %}show active{% endif %}" id="about" role="tabpanel" aria-labelledby="about-tab">
+                <div class="tab-pane fade {% if nbparties is not defined or nbparties == 0 %}show active{% endif %}" id="about" role="tabpanel" aria-labelledby="about-tab">
                     {{ include('game/profile/user_form.html.twig') }}
                 </div>
             </div>
