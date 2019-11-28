@@ -38,7 +38,7 @@ class GameController extends AbstractController
           $entityManager->flush();
         }
       }
-      
+
       $list_Campagne_started = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->getId()]);
       $list_campagne_started = [];
 
@@ -49,7 +49,7 @@ class GameController extends AbstractController
         array_push($list_campagne_started, $d);
       }
       $list_Campagne = $entityManager->getRepository(Campagne::class)->findAll();
-      
+
       $entityManager = $this->getDoctrine()->getManager();
       $getuser = $entityManager->getRepository(User::class)->find($user);
 
@@ -125,18 +125,33 @@ class GameController extends AbstractController
     /**
      * @Route("/profile/{id}", name="profile", schemes={"https"})
      */
-      public function profile(int $id)
+      public function profile(Request $request, int $id)
       {
           $entityManager = $this->getDoctrine()->getManager();
           $userAffiche = $entityManager->getRepository(User::class)->find($id);
           $nbparties = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $userAffiche->GetId()]);
           $stat = $entityManager->getRepository(Stat::class)->find($userAffiche);
 
+          $form = $this->createForm(UserType::class, $userAffiche);
+          $form->handleRequest($request);
+
+          if ($form->isSubmitted() && $form->isValid()) {
+              $this->getDoctrine()->getManager()->flush();
+
+              return $this->redirectToRoute('profile', [
+                  'userAffiche' => $userAffiche,
+                  'user' => $this->getUser(),
+                  'stat' => $stat,
+                  'nbparties' => count($nbparties)
+              ]);
+          }
+
           return $this->render('game/profile.html.twig', [
               'userAffiche' => $userAffiche,
               'user' => $this->getUser(),
               'stat' => $stat,
               'nbparties' => count($nbparties),
+              'form' => $form->createView()
           ]);
       }
 
@@ -146,6 +161,7 @@ class GameController extends AbstractController
      */
     public function edit(Request $request, int $id)
     {
+
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->find($id);
         /*

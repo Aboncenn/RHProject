@@ -30,11 +30,10 @@
                         <h5 class="card-title">{{ campagne.nom }}</h5>
                         {% if campagne.finished == true %}
                             <p>Terminé</p>
-                            <a href="http://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fdedi.anael.eu%2Fepsi%2FRhProjectGame%2Fpublic%2F%3Ffbclid%3DIwAR1IZSIqwJoIZS74IyVQARGr_G98m9wcJU8UPYmcYUj5lrwguompCJ--yYE&summary=Le%20meilleur%20site%20de%20jeu%20de%20role%20disruptif&title=RH%20Project%20Game">Partager</a>
-                        {% else %}
+                            <a href="http://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fdedi.anael.eu%2Fepsi%2FRhProjectGame%2Fpublic%2F%3Ffbclid%3DIwAR1IZSIqwJoIZS74IyVQARGr_G98m9wcJU8UPYmcYUj5lrwguompCJ--yYE&summary=Le%20meilleur%20site%20de%20jeu%20de%20role%20disruptif&title=RH%20Project%20Game" target="blank"><img src="https://static-exp1.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20" height="20" alt="logo"/> Partager sur LinkedIn</a>
+                            {% else %}
                             <a href="{{ path ('chat', {game: campagne.id})}}" class="btn btn-success"><i class="fas fa-play-circle"></i> Reprendre la partie</a>
                         {% endif %}
-                        
                     </div>
                 </div>
             </div>
