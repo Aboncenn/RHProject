@@ -35,6 +35,11 @@ class UserByCampagne
      */
     private $chats;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $finished = False;
+
     public function __construct()
     {
         $this->chats = new ArrayCollection();
@@ -93,6 +98,18 @@ class UserByCampagne
             $this->chats->removeElement($chat);
             $chat->removeIdCampagnebyUser($this);
         }
+
+        return $this;
+    }
+
+    public function getFinished(): ?bool
+    {
+        return $this->finished;
+    }
+
+    public function setFinished(bool $finished): self
+    {
+        $this->finished = $finished;
 
         return $this;
     }
