@@ -5,7 +5,7 @@
 {% block body %}
 <style>
     body{
-        background-color: rgb(66, 63, 57);
+        background-color: #333;
         height: 100%;
         width: 100%
     }
@@ -22,12 +22,12 @@
         justify-content: space-evenly;
     }
     .bground h1{
-        color: rgb(237, 216, 202);
+        color: white;
         font: italic 3em "Fira Sans", serif;
     }
 
     .bground h2, h3, h4, h5, h6{
-        color: rgb(66, 63, 57);
+        color: white;
         font: italic 2em "Fira Sans", serif;
     }
     .bground h3, h4, h5, h6{
@@ -434,37 +434,24 @@
             messages.innerHTML = messages.innerHTML + "<strong>" + user + ": </strong>" + msg.value + "<br>";
             messages.scrollTop = messages.scrollHeight - messages.clientHeight;
             msg.value = "";
-            $.ajax({
+            /*$.ajax({
                 url : "/game/chat.php",
                 type : "GET",
                 data : {"pseudo": user,"message": msg},
-            });
+            });*/
         });
     });
 
-    function reload(){
+    /*function reload(){
         setTimeout(function(){
             var chat_id = document.getElementById("chat-id").innerHTML;
             console.log(chat_id);
             var premierID = $('#messages p:first').attr('id');
-            $.ajax({
-                url : '{{ path('getChat', {chatid: chat.id}) }}',
-                type : "POST",
-                data: {
-                    chatid: chat_id,
-                    message: document.getElementById("messages")
-                },
-                success : function(html){
-                    $('#messages').prepend(html);
-                },
-                error : function(e) {
-                    console.log(e);
-                }
-            });
+
             reload();
         }, 1000);
 
-    }
+    }*/
 
     function fill_context(id){
         var element = document.getElementById("scenario-context");
