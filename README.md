@@ -47,7 +47,8 @@ This command executes all migration files that have not already been run against
 >  php bin/console doctrine:migrations:migrate
 
 # Usage  
-
+  Afficher la page /public/ du projet
+  
 ## How it works
 
 # External libraries
