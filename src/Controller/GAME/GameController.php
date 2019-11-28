@@ -5,6 +5,7 @@ namespace App\Controller\GAME;
 use App\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
@@ -79,19 +80,8 @@ class GameController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
         $entityManager = $this->getDoctrine()->getManager();
         $campagne= $entityManager->getRepository(UserByCampagne::class)->find($game);
-        $chat = $campagne->getChats();
+        $chat = $campagne->getChats()->getValues()[0];
         $user = $this->getUser();
-        $upstat= $entityManager->getRepository(Stat::class)->findBy(['id_User' => $user]);
-        foreach ($upstat as $key => $value) {
-          $value->setCommunication(random_int(1, 10));
-          $value->setCriticalThinking(random_int(1, 10));
-          $value->setLeadership(random_int(1, 10));
-          $value->setPositiveAttitude(random_int(1, 10));
-          $value->setTeamWork(random_int(1, 10));
-          $value->setWorkEthic(random_int(1, 10));
-        } 
-        $entityManager->persist($value);
-        $entityManager->flush();
 
           return $this->render('game/chat.html.twig', [
               'chat' => $chat,
@@ -99,10 +89,13 @@ class GameController extends AbstractController
           ]);
       }
       /**
-      * @Route("/chat/{chatid}/getchat", name="getChat",methods={"GET", "POST"}, requirements={"game "="\d+", "id "="\d+"} )
+      * @Route("/chat/{chatid}/getchat", name="getChat",methods={"GET", "POST"} )
       */
-        public function getChat($chatid, $idmessage)
+        public function getChat(Request $request, $chatid)
         {
+            $chatid = $request->request->get('chatid');
+            $messages = $request->request->get('message');
+            var_dump($chatid, $messages);
           $this->denyAccessUnlessGranted('ROLE_USER');
           $entityManager = $this->getDoctrine()->getManager();
           $Allmessenger= $entityManager->getRepository(MessageRepository::class)->getMessage($chatid,$idmessage);
@@ -146,6 +139,52 @@ class GameController extends AbstractController
                 }
         */
         return $this->redirectToRoute('profile', ['id' => $id]);
+    }
+
+    /**
+     * @Route("/profile/{id}/score", name="profile_score", methods={"GET", "POST"}, schemes={"https"})
+     */
+    public function score(Request $request, int $id)
+    {
+        $score = $request->request->get('score');
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->find($id);
+        $stat = $entityManager->getRepository(Stat::class)->find($user);
+
+        $com = $stat->getCommunication() + floatval($score['communication']);
+        if ($com < 0)
+            $com = 0;
+        $esprit = $stat->getCriticalThinking() + floatval($score['esprit']);
+        if ($esprit < 0)
+            $esprit = 0;
+        $leadership = $stat->getLeadership() + floatval($score['leadership']);
+        if ($leadership < 0)
+            $leadership = 0;
+        $positive = $stat->getPositiveAttitude() + floatval($score['positive']);
+        if ($positive < 0)
+            $positive = 0;
+        $equipe = $stat->getTeamWork() + floatval($score['equipe']);
+        if ($equipe < 0)
+            $equipe = 0;
+        $ethique = $stat->getWorkEthic() + floatval($score['ethique']);
+        if ($ethique < 0)
+            $ethique = 0;
+
+        $stat->setCommunication($com);
+        $stat->setCriticalThinking($esprit);
+        $stat->setLeadership($leadership);
+        $stat->setPositiveAttitude($positive);
+        $stat->setTeamWork($equipe);
+        $stat->setWorkEthic($ethique);
+
+        $entityManager->persist($stat);
+        $entityManager->flush();
+
+        return new Response(
+            '[{ status: "OK" }]',
+            Response::HTTP_OK,
+            ['content-type' => 'text/html']
+        );
     }
 
 }

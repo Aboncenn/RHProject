@@ -98,7 +98,7 @@
     .chat-btn{
         width: 30%;
         background-color: rgb(66, 63, 57);
-        color: rgbrgb(237, 216, 202);
+        color: rgb(237, 216, 202);
     }
     .chat-btn:hover{
         background-color: rgb(237, 216, 202);
@@ -128,11 +128,12 @@
 
 <div class="bground">
     <h1>Page de jeu de <strong id="user">{{ user.username }}</strong></h1>
+    <input id="chat-userid" type="hidden" value="{{ user.id }}" />
     <div class="body-wrapper">
         <div class="chat">
             <h2>Chat</h2>
             <div class="chat-box">
-                <h6 class="chat-message-title"> Messages </h3>
+                <h6 class="chat-message-title"> Messages </h6>
                 <div class="chat-messages" id="messages">
 
                 </div>
@@ -163,18 +164,42 @@
                     "id": 1,
                     "text": "On fouille",
                     "link": "2",
+                    "score": {
+                        "Communication": 1,
+                        "Esprit": 0,
+                        "Leadership": 1,
+                        "Positive": 1,
+                        "Equipe": 1,
+                        "Ethique": 0
+                    }
                 },
                 {
                     "id": 2,
                     "text": "On sort",
                     "link": "3",
+                    "score": {
+                        "Communication": 0,
+                        "Esprit": -1,
+                        "Leadership": 0,
+                        "Positive": -1,
+                        "Equipe": 0,
+                        "Ethique": 0
+                    }
                 },
                 {
                     "id": 3,
                     "text": "On fonce",
                     "link": "4",
-                },
-            ],
+                    "score": {
+                        "Communication": -1,
+                        "Esprit": 0,
+                        "Leadership": 1,
+                        "Positive": 0,
+                        "Equipe": -1,
+                        "Ethique": 0
+                    }
+                }
+            ]
         },
         "2": {
             "context": "Il y a des chauves-souris et un ruisseau proches de vous, plus loin la caverne continue, où allez vous ?",
@@ -183,18 +208,42 @@
                     "id": 1,
                     "text": "Proche des chauves-souris",
                     "link": "7",
+                    "score": {
+                        "Communication": 1,
+                        "Esprit": 1,
+                        "Leadership": 0,
+                        "Positive": 0,
+                        "Equipe": 0,
+                        "Ethique": 0
+                    }
                 },
                 {
                     "id": 2,
                     "text": "Proche du ruisseau",
                     "link": "8",
+                    "score": {
+                        "Communication": 1,
+                        "Esprit": 1,
+                        "Leadership": 0,
+                        "Positive": 1,
+                        "Equipe": 0,
+                        "Ethique": 0
+                    }
                 },
                 {
                     "id": 3,
                     "text": "On continue dans la caverne",
                     "link": "4",
-                },
-            ],
+                    "score": {
+                        "Communication": 0,
+                        "Esprit": 0,
+                        "Leadership": 1,
+                        "Positive": 0,
+                        "Equipe": 1,
+                        "Ethique": 0
+                    }
+                }
+            ]
         },
         "3": {
             "context": "Avez-vous si peur que ça ? il n'y a rien dehors, que faites-vous ?",
@@ -203,13 +252,29 @@
                     "id": 1,
                     "text": "On retourne dans la caverne",
                     "link": "1",
+                    "score": {
+                        "Communication": -1,
+                        "Esprit": -1,
+                        "Leadership": -1,
+                        "Positive": -1,
+                        "Equipe": -1,
+                        "Ethique": 0
+                    }
                 },
                 {
                     "id": 2,
                     "text": "Abandonner",
                     "link": "-1",
+                    "score": {
+                        "Communication": -1,
+                        "Esprit": -1,
+                        "Leadership": -1,
+                        "Positive": -1,
+                        "Equipe": -1,
+                        "Ethique": -1
+                    }
                 }
-             ],
+             ]
         },
         "4": {
             "context": "Alors que vous avancez dans la caverne, vous voyez un trésor au loin, que faites-vous ?",
@@ -218,13 +283,29 @@
                     "id": 4,
                     "text": "C'est surement un piège, on fait demi-tour",
                     "link": "2",
+                    "score": {
+                        "Communication": 1,
+                        "Esprit": 1,
+                        "Leadership": 1,
+                        "Positive": 1,
+                        "Equipe": 1,
+                        "Ethique": 1
+                    }
                 },
                 {
                     "id": 5,
                     "text": "On l'ouvre !",
                     "link": "6",
-                },
-            ],
+                    "score": {
+                        "Communication": 0,
+                        "Esprit": 1,
+                        "Leadership": 0,
+                        "Positive": 1,
+                        "Equipe": 1,
+                        "Ethique": 0
+                    }
+                }
+            ]
         },
         "6": {
             "context": "Vous êtes riches, Bravo !",
@@ -232,9 +313,9 @@
                 {
                     "id": 5,
                     "text": "Terminer",
-                    "link": "-1",
-                },
-            ],
+                    "link": "-1"
+                }
+            ]
         },
         "7": {
             "context": "Une chauve-souris s'envole vers l'extérieur de la caverne, que faites-vous ?",
@@ -243,13 +324,29 @@
                     "id": 1,
                     "text": "On sort avec la chauve-souris",
                     "link": "3",
+                    "score": {
+                        "Communication": 0,
+                        "Esprit": 0,
+                        "Leadership": -1,
+                        "Positive": -1,
+                        "Equipe": 0,
+                        "Ethique": 0
+                    }
                 },
                 {
                     "id": 2,
                     "text": "On continue de fouiller",
                     "link": "2",
-                },
-            ],
+                    "score": {
+                        "Communication": 1,
+                        "Esprit": 1,
+                        "Leadership": 0,
+                        "Positive": 1,
+                        "Equipe": 1,
+                        "Ethique": 0
+                    }
+                }
+            ]
         },
         "8": {
             "context": "Une carcasse de chevreuil est étendue au fond du ruisseau, que faites-vous ?",
@@ -258,13 +355,29 @@
                     "id": 1,
                     "text": "On fouille la carcasse",
                     "link": "9",
+                    "score": {
+                        "Communication": 1,
+                        "Esprit": 1,
+                        "Leadership": 0,
+                        "Positive": -1,
+                        "Equipe": 0,
+                        "Ethique": -1
+                    }
                 },
                 {
                     "id": 2,
                     "text": "On continue de fouiller la caverne",
                     "link": "2",
-                },
-            ],
+                    "score": {
+                        "Communication": 1,
+                        "Esprit": 1,
+                        "Leadership": 0,
+                        "Positive": 1,
+                        "Equipe": 1,
+                        "Ethique": 0
+                    }
+                }
+            ]
         },
         "9": {
             "context": "Des traces de crocs acérés montrent que cette carcasse a été dévorée par un loup, que faites-vous ?",
@@ -273,21 +386,43 @@
                     "id": 1,
                     "text": "On avance dans la caverne ! si il ya un loup, nous le tuerons !",
                     "link": "4",
+                    "score": {
+                        "Communication": 0,
+                        "Esprit": 1,
+                        "Leadership": 1,
+                        "Positive": -2,
+                        "Equipe": 1,
+                        "Ethique": -2
+                    }
                 },
                 {
                     "id": 2,
                     "text": "On continue de fouiller la caverne",
                     "link": "2",
+                    "score": {
+                        "Communication": 1,
+                        "Esprit": 1,
+                        "Leadership": 0,
+                        "Positive": 1,
+                        "Equipe": 1,
+                        "Ethique": 0
+                    }
                 },
                 {
                     "id": 2,
-                    "text": "Un loup ? Fuions !",
+                    "text": "Un loup ? Fuyons !",
                     "link": "3",
-                },
-            ],
+                    "score": {
+                        "Communication": 0,
+                        "Esprit": 1,
+                        "Leadership": -1,
+                        "Positive": -1,
+                        "Equipe": 0,
+                        "Ethique": 0
+                    }
+                }
+            ]
         }
-
-
     };
 
     $(function() {
@@ -312,11 +447,17 @@
             console.log(chat_id);
             var premierID = $('#messages p:first').attr('id');
             $.ajax({
-                url : "/game/chat/" + chat_id + "/getChat", // on passe l'id le plus récent au fichier de chargement
-                type : "GET",
-                data: premierID,
+                url : '{{ path('getChat', {chatid: chat.id}) }}',
+                type : "POST",
+                data: {
+                    chatid: chat_id,
+                    message: document.getElementById("messages")
+                },
                 success : function(html){
                     $('#messages').prepend(html);
+                },
+                error : function(e) {
+                    console.log(e);
                 }
             });
             reload();
@@ -342,14 +483,55 @@
             return false;
         }
         COMPAIGN[id]["buttons"].forEach(function(item){
-            html = html + '<button class="scenario-btn btn btn-outline-primary btn-sm" id="'+ item["id"]+ '" onclick="fill_game_scenario(' + item["link"] + ')">' + item["text"] + '</button>';
+            html += '<button class="scenario-btn btn btn-outline-primary btn-sm" ' +
+                'id="'+ id + "-" + item["id"] + '" onclick="fill_game_scenario(' + item["link"] + ',' + id + ',' + item["id"] + ')"';
+            if (item["score"]) {
+                // Data id for score values
+                html += ' data-communication="' + item["score"]["Communication"] + '"';
+                html += ' data-esprit="' + item["score"]["Esprit"] + '"';
+                html += ' data-leadership="' + item["score"]["Leadership"] + '"';
+                html += ' data-positive="' + item["score"]["Positive"] + '"';
+                html += ' data-equipe="' + item["score"]["Equipe"] + '"';
+                html += ' data-ethique="' + item["score"]["Ethique"] + '"';
+            }
+            html += '">' + item["text"] + '</button>';
         });
         element.innerHTML = html;
     }
 
-    function fill_game_scenario(id){
-        fill_context(id);
-        fill_buttons(id);
+    function fill_scores(compaignId, buttonId) {
+        var btn = $("button#" + compaignId + "-" + buttonId);
+        var score = {
+            "communication" : btn.data("communication"),
+            "esprit" : btn.data("esprit"),
+            "leadership" : btn.data("leadership"),
+            "positive" : btn.data("positive"),
+            "equipe" : btn.data("equipe"),
+            "ethique" : btn.data("ethique")
+        };
+
+        $.ajax({
+            url : "{{ path('profile_score', {id: user.id}) }}",
+            type : "POST",
+            dataType: "json",
+            data: {
+                score: score
+            },
+            success : function(result){
+                console.log(result);
+            },
+            error : function(e)
+            {
+                console.log(e);
+            }
+        });
+    }
+
+    function fill_game_scenario(nextId, compaignId, buttonId){
+        if (compaignId && buttonId)
+            fill_scores(compaignId, buttonId);
+        fill_context(nextId);
+        fill_buttons(nextId);
     }
 
     //reload();
