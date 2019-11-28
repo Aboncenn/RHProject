@@ -1,29 +1,29 @@
-<form id="profile-form" method="post" action="{{ path('profile_edit', {id: user.id}) }}" class="col-sm-10">
+<form id="profile-form" method="post" action="{{ path('profile_edit', {id: userAffiche.id}) }}" class="col-sm-10">
     <div class="form-group">
         <div class="row">
             <div class="col">
                 <label for="profile-lastname">Nom</label>
-                <input type="text" class="form-control" id="profile-lastname" value="{{ user.nom }}">
+                <input type="text" class="form-control" id="profile-lastname" value="{{ userAffiche.nom }}">
             </div>
             <div class="col">
                 <label for="profile-firstname">Prénom</label>
-                <input type="text" class="form-control" id="profile-firstname" value="{{ user.prenom }}">
+                <input type="text" class="form-control" id="profile-firstname" value="{{ userAffiche.prenom }}">
             </div>
         </div>
     </div>
     <div class="form-group">
         <label for="profile-username">Nom d'utilisateur</label>
-        <input type="text" class="form-control" id="profile-username" value="{{ user.username }}">
+        <input type="text" class="form-control" id="profile-username" value="{{ userAffiche.username }}">
     </div>
     <div class="form-group">
         <div class="row">
             <div class="col">
                 <label for="profile-email">Email</label>
-                <input type="email" class="form-control" id="profile-email" value="{{ user.email }}">
+                <input type="email" class="form-control" id="profile-email" value="{{ userAffiche.email }}">
             </div>
             <div class="col">
                 <label for="profile-linkedin"><img src="https://static-exp1.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20" height="20" alt="logo"/> Linkedin</label>
-                <input type="url" class="form-control" id="profile-linkedin" value="{{ user.LinkLinkedin }}">
+                <input type="url" class="form-control" id="profile-linkedin" value="{{ userAffiche.LinkLinkedin }}">
             </div>
             <div class="col">
                 <label for="profile-github"><img src="https://github.com/fluidicon.png" width="20" height="20" alt="logo"/> Github</label>

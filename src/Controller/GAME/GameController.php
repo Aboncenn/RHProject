@@ -128,12 +128,13 @@ class GameController extends AbstractController
       public function profile(int $id)
       {
           $entityManager = $this->getDoctrine()->getManager();
-          $user = $entityManager->getRepository(User::class)->find($id);
-          $nbparties = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $user->GetId()]);
-          $stat = $entityManager->getRepository(Stat::class)->find($user);
+          $userAffiche = $entityManager->getRepository(User::class)->find($id);
+          $nbparties = $entityManager->getRepository(UserByCampagne::class)->findBy(['id_user' => $userAffiche->GetId()]);
+          $stat = $entityManager->getRepository(Stat::class)->find($userAffiche);
 
           return $this->render('game/profile.html.twig', [
-              'user' => $user,
+              'userAffiche' => $userAffiche,
+              'user' => $this->getUser(),
               'stat' => $stat,
               'nbparties' => count($nbparties)
           ]);
