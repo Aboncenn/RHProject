@@ -30,7 +30,7 @@
                         <h5 class="card-title">{{ campagne.nom }}</h5>
                         {% if campagne.finished == true %}
                             <p>Terminé</p>
-                            <a href="#"> Partager </a>
+                            <a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.epsi.fr%2F%3Fgclid%3DCjwKCAiA_f3uBRAmEiwAzPuaMy4RYi9bX2q1FCwnhcoC6RupFNfBsQzrWOXNPGVa5zqbIZ4k8z1XEhoCu3YQAvD_BwE">Partager</a>
                         {% else %}
                             <a href="{{ path ('chat', {game: campagne.id})}}" class="btn btn-success"><i class="fas fa-play-circle"></i> Reprendre la partie</a>
                         {% endif %}
